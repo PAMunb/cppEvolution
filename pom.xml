@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>CPPEvolution</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.eclipse.cdt</groupId>
+            <artifactId>core-native</artifactId>
+            <version>6.1.100.202102030214</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.cdt.core.native_6.1.100.202102030214.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.cdt</groupId>
+            <artifactId>core</artifactId>
+            <version>7.2.0.202102251239</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.cdt.core_7.2.0.202102251239.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.equinox</groupId>
+            <artifactId>common</artifactId>
+            <version>3.14.100.v20210212-1143</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.equinox.common_3.14.100.v20210212-1143.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>runtime</artifactId>
+            <version>3.20.100.v20210111-0815</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.core.runtime_3.20.100.v20210111-0815.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.core</groupId>
+            <artifactId>jobs</artifactId>
+            <version>3.10.1100.v20210111-0815</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.core.jobs_3.10.1100.v20210111-0815.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse</groupId>
+            <artifactId>osgi</artifactId>
+            <version>3.16.200.v20210226-1447</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/lib/org.eclipse.osgi_3.16.200.v20210226-1447.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.prefs</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>5.11.1.202105131744-r</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+</project>
