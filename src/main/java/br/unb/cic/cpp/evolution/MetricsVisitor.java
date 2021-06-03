@@ -1,16 +1,16 @@
 package br.unb.cic.cpp.evolution;
 
-import org.eclipse.cdt.core.dom.ast.ASTVisitor;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.*;
 
 public class MetricsVisitor extends ASTVisitor {
 
     private int lambdaExpressions = 0;
-    private int allExpressions;
-    private int typeInference = 0;
+    private int auto = 0;
+    private int rangeFor = 0;
+    private int constExpr = 0;
 
     public MetricsVisitor() {
+        this.shouldVisitStatements = true;
         this.shouldVisitDeclarations = true;
         this.shouldVisitExpressions = true;
     }
@@ -20,25 +20,46 @@ public class MetricsVisitor extends ASTVisitor {
         if(expression instanceof org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTLambdaExpression) {
             lambdaExpressions++;
         }
-        allExpressions++;
         return PROCESS_CONTINUE;
     }
 
     @Override
     public int visit(IASTDeclaration declaration) {
+        if(declaration.getRawSignature().contains("auto ")) {
+            auto++;
+        }
+        if(declaration.getRawSignature().contains("constexpr")) {
+            constExpr++;
+        }
         return PROCESS_CONTINUE;
+    }
+
+    @Override
+    public int visit(IASTStatement statement) {
+        if(statement instanceof org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTRangeBasedForStatement) {
+            rangeFor++;
+        }
+        return super.visit(statement);
     }
 
     public void reset() {
         lambdaExpressions = 0;
-        typeInference = 0;
+        auto = 0;
     }
 
     public int getLambdaExpressions() {
         return lambdaExpressions;
     }
 
-    public int getAllExpressions() {
-        return allExpressions;
+    public int getAuto() {
+        return auto;
+    }
+
+    public int getRangeFor() {
+        return rangeFor;
+    }
+
+    public int getConstExpr() {
+        return constExpr;
     }
 }

@@ -2,7 +2,9 @@ package br.unb.cic.cpp.evolution;
 
 
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
@@ -10,20 +12,23 @@ import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevSort;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class RepositoryWalker {
-
-
     private String project;
     private String path;
     private int totalCommits = 0;
     private Repository repository;
     private List<Observation> observations;
+    Logger logger = LoggerFactory.getLogger(getClass());
+
+
 
     // private static final Date baseDate = Calendar.getInstance().set(2010, 01, 01);
 
@@ -36,6 +41,8 @@ public class RepositoryWalker {
     }
 
     public void walk() throws Exception {
+        logger.info("Processing " + project);
+
         Calendar calendar = Calendar.getInstance();
         calendar.set(2010, Calendar.JANUARY, 1);
         Date base = calendar.getTime();
@@ -44,6 +51,8 @@ public class RepositoryWalker {
 
         RevWalk walk = new RevWalk(repository);
         walk.markStart(heads());
+
+        ObjectId head = repository.resolve(Constants.HEAD);
 
         walk.sort(RevSort.TOPO, true);
         walk.sort(RevSort.COMMIT_TIME_DESC, true);
@@ -60,10 +69,12 @@ public class RepositoryWalker {
             }
         }
         Collections.sort(commitDates);
-        int max = 100;
+        Collections.reverse(commitDates);
+        int max = 1;
         for(Date current: commitDates) {
             if(previous == null || (diffInDays(previous, current) >= 7)) {
-                collectMetrics(current, commits);
+                logger.info(" - revision " + commits.get(current).getName() + " " + current);
+                collectMetrics(head, current, commits);
                 previous = current;
                 totalCommits++;
                 max--;
@@ -72,7 +83,8 @@ public class RepositoryWalker {
         }
     }
 
-    private void collectMetrics(Date current, HashMap<Date, ObjectId> commits) throws Exception {
+    private void collectMetrics(ObjectId head, Date current, HashMap<Date, ObjectId> commits) throws Exception {
+        Long start = System.currentTimeMillis();
         ObjectId id = commits.get(current);
 
         RevCommit commit = repository.parseCommit(id);
@@ -82,18 +94,39 @@ public class RepositoryWalker {
         o.setDate(commit.getAuthorIdent().getWhen());
         o.setRevision(id.name());
 
-        // Git git = new Git(repository);
+        Git git = new Git(repository);
 
-        // git.checkout().setName(id.getName()).call();
+        git.checkout().setName(id.getName()).call();
 
+        int genericError = 0;
+        int ioError = 0;
+        int parserError = 0;
         Collection<File> files = FileUtil.listFiles(this.path);
         MetricsVisitor visitor = new MetricsVisitor();
         for(File f: files) {
-            CPPParser parser = new CPPParser();
-            IASTTranslationUnit unit = parser.parse(FileUtil.readContent(f));
-            unit.accept(visitor);
+            try {
+                CPPParser parser = new CPPParser();
+                IASTTranslationUnit unit = parser.parse(FileUtil.readContent(f));
+                unit.accept(visitor);
+            }
+            catch(IOException e) {
+                ioError++;
+            }
+            catch(CoreException e) {
+                parserError++;
+            }
+            catch(Throwable t) {
+                genericError++;
+            }
         }
+        git.checkout().setName(head.getName()).call();
         o.setNumberOfLambdaExpressions(visitor.getLambdaExpressions());
+        o.setFiles(files.size());
+        o.setError(0, ioError);
+        o.setError(1, parserError);
+        o.setError(2, genericError);
+        o.setElapsedTime(System.currentTimeMillis() - start);
+
         observations.add(o);
     }
 
