@@ -1,13 +1,15 @@
 package br.unb.cic.cpp.evolution;
 
 import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement;
 
 public class MetricsVisitor extends ASTVisitor {
 
     private int lambdaExpressions = 0;
     private int auto = 0;
-    private int rangeFor = 0;
+    private int rangeForStatement = 0;
     private int constExpr = 0;
+    private int ifStatementWithInitializer = 0;
 
     public MetricsVisitor() {
         this.shouldVisitStatements = true;
@@ -37,7 +39,13 @@ public class MetricsVisitor extends ASTVisitor {
     @Override
     public int visit(IASTStatement statement) {
         if(statement instanceof org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTRangeBasedForStatement) {
-            rangeFor++;
+            rangeForStatement++;
+        }
+        if(statement instanceof CPPASTIfStatement) {
+            CPPASTIfStatement ifStatement = (CPPASTIfStatement)statement;
+            if(ifStatement.getInitializerStatement() != null) {
+                ifStatementWithInitializer++;
+            }
         }
         return super.visit(statement);
     }
@@ -55,11 +63,15 @@ public class MetricsVisitor extends ASTVisitor {
         return auto;
     }
 
-    public int getRangeFor() {
-        return rangeFor;
+    public int getRangeForStatement() {
+        return rangeForStatement;
     }
 
     public int getConstExpr() {
         return constExpr;
+    }
+
+    public int getIfStatementWithInitializer() {
+        return ifStatementWithInitializer;
     }
 }
