@@ -25,7 +25,7 @@ public class RepositoryWalker {
     private String path;
     private int totalCommits = 0;
     private Repository repository;
-    private List<Observation> observations;
+    private List<SummaryOfObservations> observations;
     Logger logger = LoggerFactory.getLogger(getClass());
 
 
@@ -89,7 +89,7 @@ public class RepositoryWalker {
 
         RevCommit commit = repository.parseCommit(id);
 
-        Observation o = new Observation();
+        SummaryOfObservations o = new SummaryOfObservations();
         o.setProject(project);
         o.setDate(commit.getAuthorIdent().getWhen());
         o.setRevision(id.name());
@@ -142,7 +142,7 @@ public class RepositoryWalker {
         return commits;
     }
 
-    public List<Observation> getObservations() {
+    public List<SummaryOfObservations> getObservations() {
         return observations;
     }
 }

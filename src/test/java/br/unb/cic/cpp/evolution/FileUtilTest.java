@@ -12,7 +12,7 @@ public class FileUtilTest {
     @Test
     public void testListFiles() {
         Collection<File> files = FileUtil.listFiles(getClass().getClassLoader().getResource("sample").getFile());
-        Assert.assertEquals(13, files.size());
+        Assert.assertEquals(16, files.size());
     }
 
     @Test

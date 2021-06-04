@@ -13,7 +13,7 @@ public class RepositoryWalkerTest {
 
             walker.walk();
 
-            for(Observation o: walker.getObservations()) {
+            for(SummaryOfObservations o: walker.getObservations()) {
                 System.out.println(o.toString());
             }
 

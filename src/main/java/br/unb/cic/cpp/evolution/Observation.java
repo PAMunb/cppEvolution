@@ -1,34 +1,49 @@
 package br.unb.cic.cpp.evolution;
 
-import java.util.Date;
-
 public class Observation {
-    private String project;
+
+    enum Type {
+        LAMBDA_EXPRESSION,
+        AUTO,
+        RANGE_FOR_STATEMENT,
+        CONST_EXPRESSION,
+        IF_STATEMENT_WITH_INITIALIZER
+    }
+
+    private Type type;
+    private String code;
+    private String file;
     private String revision;
-    private Date date;
-    private int numberOfLambdaExpressions;
-    private int files;
-    private int[] errors = new int[] {0, 0, 0};
-    private long elapsedTime;
 
-    public int getFiles() {
-        return files;
+    public Observation(Type type, String code) {
+        this.type = type;
+        this.code = code;
+        this.file = file;
+        this.revision = revision;
     }
 
-    public int[] getErrors() {
-        return errors;
+    public Type getType() {
+        return type;
     }
 
-    public long getElapsedTime() {
-        return elapsedTime;
+    public void setType(Type type) {
+        this.type = type;
     }
 
-    public String getProject() {
-        return project;
+    public String getCode() {
+        return code;
     }
 
-    public void setProject(String project) {
-        this.project = project;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 
     public String getRevision() {
@@ -37,47 +52,5 @@ public class Observation {
 
     public void setRevision(String revision) {
         this.revision = revision;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public int getNumberOfLambdaExpressions() {
-        return numberOfLambdaExpressions;
-    }
-
-    public void setNumberOfLambdaExpressions(int numberOfLambdaExpressions) {
-        this.numberOfLambdaExpressions = numberOfLambdaExpressions;
-    }
-
-    public String toString() {
-        return date.toString()
-                + " Lambda Expressions " + numberOfLambdaExpressions + ", "
-                + " errors ("
-                + errors[0] + ", "
-                + errors[1] + ", "
-                + errors[2] + ") "
-                + elapsedTime / 1000.0 + "s";
-    }
-
-    public void setFiles(int files) {
-        this.files = files;
-    }
-
-    public void setError(int idx, int errors) {
-        this.errors[idx] = errors;
-    }
-
-    public void setErrors(int[] errors) {
-        this.errors = errors;
-    }
-
-    public void setElapsedTime(long elapsedTime) {
-        this.elapsedTime = elapsedTime;
     }
 }
