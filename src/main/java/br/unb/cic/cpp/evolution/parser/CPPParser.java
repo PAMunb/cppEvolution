@@ -1,4 +1,4 @@
-package br.unb.cic.cpp.evolution;
+package br.unb.cic.cpp.evolution.parser;
 
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.gnu.cpp.GPPLanguage;

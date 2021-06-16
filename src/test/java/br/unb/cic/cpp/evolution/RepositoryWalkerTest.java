@@ -1,5 +1,7 @@
 package br.unb.cic.cpp.evolution;
 
+import br.unb.cic.cpp.evolution.git.RepositoryWalker;
+import br.unb.cic.cpp.evolution.model.SummaryOfObservations;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +15,7 @@ public class RepositoryWalkerTest {
 
             walker.walk();
 
-            for(SummaryOfObservations o: walker.getObservations()) {
+            for(SummaryOfObservations o: walker.getSummary()) {
                 System.out.println(o.toString());
             }
 

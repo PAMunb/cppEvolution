@@ -1,6 +1,11 @@
-package br.unb.cic.cpp.evolution;
+package br.unb.cic.cpp.evolution.git;
 
 
+import br.unb.cic.cpp.evolution.io.FileUtil;
+import br.unb.cic.cpp.evolution.model.Observation;
+import br.unb.cic.cpp.evolution.model.SummaryOfObservations;
+import br.unb.cic.cpp.evolution.parser.CPPParser;
+import br.unb.cic.cpp.evolution.parser.MetricsVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
@@ -25,19 +30,17 @@ public class RepositoryWalker {
     private String path;
     private int totalCommits = 0;
     private Repository repository;
-    private List<SummaryOfObservations> observations;
+    private List<Observation> observations;
+    private List<SummaryOfObservations> summary;
     Logger logger = LoggerFactory.getLogger(getClass());
-
-
-
-    // private static final Date baseDate = Calendar.getInstance().set(2010, 01, 01);
 
     public RepositoryWalker(String project, String path) throws Exception {
         this.project = project;
         this.path = path;
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
-        repository = builder.setGitDir(new File(path + ".git")).readEnvironment().findGitDir().build();
+        repository = builder.setGitDir(new File(path + "/.git")).readEnvironment().findGitDir().build();
         observations = new ArrayList<>();
+        summary = new ArrayList<>();
     }
 
     public void walk() throws Exception {
@@ -69,16 +72,18 @@ public class RepositoryWalker {
             }
         }
         Collections.sort(commitDates);
-        Collections.reverse(commitDates);
-        int max = 1;
+        System.out.println("Number of commits: " + commits.size());
+
+        //Collections.reverse(commitDates);
+        //int max = 10;
         for(Date current: commitDates) {
             if(previous == null || (diffInDays(previous, current) >= 7)) {
-                logger.info(" - revision " + commits.get(current).getName() + " " + current);
+                System.out.println(" - revision " + commits.get(current).getName() + " " + current);
                 collectMetrics(head, current, commits);
                 previous = current;
                 totalCommits++;
-                max--;
-                if(max == 0) break;
+//                max--;
+//                if(max == 0) break;
             }
         }
     }
@@ -89,10 +94,10 @@ public class RepositoryWalker {
 
         RevCommit commit = repository.parseCommit(id);
 
-        SummaryOfObservations o = new SummaryOfObservations();
-        o.setProject(project);
-        o.setDate(commit.getAuthorIdent().getWhen());
-        o.setRevision(id.name());
+        SummaryOfObservations summary = new SummaryOfObservations();
+        summary.setProject(project);
+        summary.setDate(commit.getAuthorIdent().getWhen());
+        summary.setRevision(id.name());
 
         Git git = new Git(repository);
 
@@ -102,6 +107,7 @@ public class RepositoryWalker {
         int ioError = 0;
         int parserError = 0;
         Collection<File> files = FileUtil.listFiles(this.path);
+
         MetricsVisitor visitor = new MetricsVisitor();
         for(File f: files) {
             try {
@@ -120,14 +126,20 @@ public class RepositoryWalker {
             }
         }
         git.checkout().setName(head.getName()).call();
-        o.setNumberOfLambdaExpressions(visitor.getLambdaExpressions());
-        o.setFiles(files.size());
-        o.setError(0, ioError);
-        o.setError(1, parserError);
-        o.setError(2, genericError);
-        o.setElapsedTime(System.currentTimeMillis() - start);
+        observations.addAll(visitor.getObservations());
+        summary.setNumberOfLambdaExpressions(visitor.getLambdaExpressions());
+        summary.setNumberOfAutoDeclarations(visitor.getAuto());
+        summary.setNumberOfDeclType(visitor.getDeclType());
+        summary.setNumberOfForRangeStatements(visitor.getRangeForStatement());
+        summary.setNumberOfConstExpressions(visitor.getConstExpr());
+        summary.setNumberOfIfWithInitializerStatements(visitor.getIfStatementWithInitializer());
+        summary.setFiles(files.size());
+        summary.setError(0, ioError);
+        summary.setError(1, parserError);
+        summary.setError(2, genericError);
+        summary.setElapsedTime(System.currentTimeMillis() - start);
 
-        observations.add(o);
+        this.summary.add(summary);
     }
 
     public long diffInDays(Date previous, Date current) {
@@ -142,7 +154,8 @@ public class RepositoryWalker {
         return commits;
     }
 
-    public List<SummaryOfObservations> getObservations() {
-        return observations;
+    public List<SummaryOfObservations> getSummary() {
+        return summary;
     }
+    public List<Observation> getObservations() { return observations; }
 }

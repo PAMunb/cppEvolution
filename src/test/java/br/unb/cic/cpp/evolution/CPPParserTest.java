@@ -1,5 +1,7 @@
 package br.unb.cic.cpp.evolution;
 
+import br.unb.cic.cpp.evolution.io.FileUtil;
+import br.unb.cic.cpp.evolution.parser.CPPParser;
 import org.junit.Assert;
 import org.junit.Test;
 
