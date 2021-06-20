@@ -52,18 +52,22 @@ public class RepositoryWalker {
 
         Date previous = null;
 
-        RevWalk walk = new RevWalk(repository);
-        walk.markStart(heads());
-
+//        RevWalk walk = new RevWalk(repository);
+//        walk.markStart(heads());
+//
         ObjectId head = repository.resolve(Constants.HEAD);
+//
+//        walk.sort(RevSort.TOPO, true);
+//        walk.sort(RevSort.COMMIT_TIME_DESC, true);
 
-        walk.sort(RevSort.TOPO, true);
-        walk.sort(RevSort.COMMIT_TIME_DESC, true);
+        Git git = new Git(repository);
+
+        String treeName = "refs/heads/master";
 
         HashMap<Date, ObjectId> commits = new HashMap<>();
         List<Date> commitDates = new ArrayList<>();
 
-        for(RevCommit c: walk) {
+        for(RevCommit c: git.log().add(repository.resolve(treeName)).call()) {
             PersonIdent author = c.getAuthorIdent();
             Date current = author.getWhen();
             if(current.compareTo(base) > 0) {
@@ -134,6 +138,12 @@ public class RepositoryWalker {
         summary.setNumberOfConstExpressions(visitor.getConstExpr());
         summary.setNumberOfIfWithInitializerStatements(visitor.getIfStatementWithInitializer());
         summary.setFiles(files.size());
+        summary.setNumberOfThreadDeclarations(visitor.getThreadDeclarations());
+        summary.setNumberOfSharedFutureDeclarations(0);
+        summary.setNumberOfPromiseDeclarations(visitor.getPromiseDeclarations());
+        summary.setNumberOfAsync(0);
+        summary.setNumberOfClassDeclarations(0);
+        summary.setNumberOfStatements(visitor.getStatements());
         summary.setError(0, ioError);
         summary.setError(1, parserError);
         summary.setError(2, genericError);

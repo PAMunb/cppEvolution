@@ -1,5 +1,6 @@
 package br.unb.cic.cpp.evolution.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SummaryOfObservations {
@@ -12,6 +13,13 @@ public class SummaryOfObservations {
     private long numberOfForRangeStatements;
     private long numberOfConstExpressions;
     private long numberOfIfWithInitializerStatements;
+    private long numberOfThreadDeclarations;
+    private long numberOfFutureDeclarations;
+    private long numberOfSharedFutureDeclarations;
+    private long numberOfPromiseDeclarations;
+    private long numberOfAsync;
+    private long numberOfClassDeclarations;
+    private long numberOfStatements;
     private long files;
     private long[] errors = new long[] {0, 0, 0};
     private long elapsedTime;
@@ -61,13 +69,29 @@ public class SummaryOfObservations {
     }
 
     public String toString() {
-        return date.toString()
-                + " Lambda Expressions " + numberOfLambdaExpressions + ", "
-                + " errors ("
-                + errors[0] + ", "
-                + errors[1] + ", "
-                + errors[2] + ") "
-                + elapsedTime / 1000.0 + "s";
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        return    project + ","
+                + simpleDateFormat.format(date) + ","
+                + revision + ","
+                + files + ","
+                + numberOfLambdaExpressions + ","
+                + numberOfAutoDeclarations  + ","
+                + numberOfDeclType + ","
+                + numberOfForRangeStatements + ","
+                + numberOfConstExpressions + ","
+                + numberOfIfWithInitializerStatements + ","
+                + numberOfThreadDeclarations + ","
+                + numberOfFutureDeclarations + ","
+                + numberOfSharedFutureDeclarations + ","
+                + numberOfPromiseDeclarations + ","
+                + numberOfAsync + ","
+                + numberOfClassDeclarations + ","
+                + numberOfStatements + ","
+                + errors[0] + ","
+                + errors[1] + ","
+                + errors[2] + ","
+                + elapsedTime;
     }
 
     public void setFiles(long files) {
@@ -124,5 +148,61 @@ public class SummaryOfObservations {
 
     public void setNumberOfDeclType(long numberOfDeclType) {
         this.numberOfDeclType = numberOfDeclType;
+    }
+
+    public long getNumberOfThreadDeclarations() {
+        return numberOfThreadDeclarations;
+    }
+
+    public void setNumberOfThreadDeclarations(long numberOfThreadDeclarations) {
+        this.numberOfThreadDeclarations = numberOfThreadDeclarations;
+    }
+
+    public long getNumberOfFutureDeclarations() {
+        return numberOfFutureDeclarations;
+    }
+
+    public void setNumberOfFutureDeclarations(long numberOfFutureDeclarations) {
+        this.numberOfFutureDeclarations = numberOfFutureDeclarations;
+    }
+
+    public long getNumberOfSharedFutureDeclarations() {
+        return numberOfSharedFutureDeclarations;
+    }
+
+    public void setNumberOfSharedFutureDeclarations(long numberOfSharedFutureDeclarations) {
+        this.numberOfSharedFutureDeclarations = numberOfSharedFutureDeclarations;
+    }
+
+    public long getNumberOfPromiseDeclarations() {
+        return numberOfPromiseDeclarations;
+    }
+
+    public void setNumberOfPromiseDeclarations(long numberOfPromiseDeclarations) {
+        this.numberOfPromiseDeclarations = numberOfPromiseDeclarations;
+    }
+
+    public long getNumberOfAsync() {
+        return numberOfAsync;
+    }
+
+    public void setNumberOfAsync(long numberOfAsync) {
+        this.numberOfAsync = numberOfAsync;
+    }
+
+    public long getNumberOfClassDeclarations() {
+        return numberOfClassDeclarations;
+    }
+
+    public void setNumberOfClassDeclarations(long numberOfClassDeclarations) {
+        this.numberOfClassDeclarations = numberOfClassDeclarations;
+    }
+
+    public long getNumberOfStatements() {
+        return numberOfStatements;
+    }
+
+    public void setNumberOfStatements(long numberOfStatements) {
+        this.numberOfStatements = numberOfStatements;
     }
 }

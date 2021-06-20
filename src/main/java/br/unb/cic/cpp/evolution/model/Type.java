@@ -11,5 +11,7 @@ public enum Type {
     FUTURE,
     SHARED_FUTURE,
     PROMISE,
-    ASYNC
+    ASYNC,
+    CLASS_DECLARATION,
+    STATEMENT
 }

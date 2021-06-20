@@ -16,18 +16,26 @@ public class CSVUtil {
     }
 
     public void printHeader() {
-        pw.println("project, " +
-                "date, " +
-                "revision, " +
-                "files, " +
-                "lambda, " +
-                "auto, " +
-                "range_for, " +
-                "const_expr, " +
-                "if_with_initializer, " +
-                "error1, " +
-                "error2, " +
-                "error3, " +
+        pw.println("project," +
+                "date," +
+                "revision," +
+                "files," +
+                "lambda," +
+                "auto," +
+                "decl_type," +
+                "range_for," +
+                "const_expr," +
+                "if_with_initializer," +
+                "thread_declarations," +
+                "future_declarations," +
+                "shared_future_declarations," +
+                "promise_declarations," +
+                "asinc," +
+                "class_declarations," +
+                "statements," +
+                "error1," +
+                "error2," +
+                "error3," +
                 "time");
     }
 
@@ -35,20 +43,7 @@ public class CSVUtil {
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         for(SummaryOfObservations s: summary) {
-            pw.println(String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
-                    s.getProject(),
-                    simpleDateFormat.format(s.getDate()),
-                    s.getRevision(),
-                    s.getFiles(),
-                    s.getNumberOfLambdaExpressions(),
-                    s.getNumberOfAutoDeclarations(),
-                    s.getNumberOfForRangeStatements(),
-                    s.getNumberOfConstExpressions(),
-                    s.getNumberOfIfWithInitializerStatements(),
-                    s.getErrors()[0],
-                    s.getErrors()[1],
-                    s.getErrors()[2],
-                    s.getElapsedTime()));
+            pw.println(s.toString());
         }
     }
 

@@ -3,10 +3,7 @@ package br.unb.cic.cpp.evolution.parser;
 import br.unb.cic.cpp.evolution.model.Observation;
 import br.unb.cic.cpp.evolution.model.Type;
 import org.eclipse.cdt.core.dom.ast.*;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclSpecifier;
-import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +11,8 @@ import java.util.Set;
 public class MetricsVisitor extends ASTVisitor {
 
     private Set<Observation> observations;
-
+    private int classDeclarations = 0;
+    private int statements = 0;
 
     public MetricsVisitor() {
         this.shouldVisitStatements = true;
@@ -32,6 +30,8 @@ public class MetricsVisitor extends ASTVisitor {
         return PROCESS_CONTINUE;
     }
 
+
+
     @Override
     public int visit(IASTDeclaration declaration) {
        if(declaration instanceof CPPASTSimpleDeclaration) {
@@ -46,6 +46,18 @@ public class MetricsVisitor extends ASTVisitor {
                }
                if(declSpecifier.getDeclTypeExpression() != null || declSpecifier.getType() == CPPASTSimpleDeclSpecifier.t_decltype) {
                    observations.add(createObservation(Type.DECLTYPE, declaration.getRawSignature()));
+               }
+           }
+           else if (simpleDeclaration.getDeclSpecifier() instanceof CPPASTNamedTypeSpecifier) {
+               CPPASTNamedTypeSpecifier namedTypeSpecifier = (CPPASTNamedTypeSpecifier)simpleDeclaration.getDeclSpecifier();
+               if(namedTypeSpecifier.getName().toString().startsWith("thread") || namedTypeSpecifier.getName().toString().startsWith("std::thread")) {
+                   observations.add(createObservation(Type.THREAD, declaration.getRawSignature()));
+               }
+               else if(namedTypeSpecifier.getName().toString().startsWith("promise") || namedTypeSpecifier.getName().toString().startsWith("std::promise")) {
+                   observations.add(createObservation(Type.PROMISE, declaration.getRawSignature()));
+               }
+               else if(namedTypeSpecifier.getName().toString().startsWith("future") || namedTypeSpecifier.getName().toString().startsWith("std::future")) {
+                   observations.add(createObservation(Type.FUTURE, declaration.getRawSignature()));
                }
            }
        }
@@ -72,6 +84,7 @@ public class MetricsVisitor extends ASTVisitor {
                 observations.add(createObservation(Type.IF_STATEMENT_WITH_INITIALIZER, statement.getRawSignature()));
             }
         }
+        statements++;
         return super.visit(statement);
     }
 
@@ -108,6 +121,34 @@ public class MetricsVisitor extends ASTVisitor {
 
     public long getIfStatementWithInitializer() {
         return getNumberOfObservationsOfType(Type.IF_STATEMENT_WITH_INITIALIZER);
+    }
+
+    public long getThreadDeclarations() {
+        return getNumberOfObservationsOfType(Type.THREAD);
+    }
+
+    public long getFutureDeclarations() {
+        return getNumberOfObservationsOfType(Type.FUTURE);
+    }
+
+    public long getSharedFutureDeclarations() {
+        return getNumberOfObservationsOfType(Type.SHARED_FUTURE);
+    }
+
+    public long getPromiseDeclarations() {
+        return getNumberOfObservationsOfType(Type.PROMISE);
+    }
+
+    public long getAsinc() {
+        return getNumberOfObservationsOfType(Type.ASYNC);
+    }
+
+    public long getClassDeclarations() {
+        return getNumberOfObservationsOfType(Type.CLASS_DECLARATION);
+    }
+
+    public long getStatements() {
+        return statements;
     }
 
     private Observation createObservation(Type type, String code) {
