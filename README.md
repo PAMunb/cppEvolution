@@ -26,7 +26,7 @@ adoption as well as historical trends observing the Git history of the projects.
 Clone the repository and then execute:
 
    * `$ ./install-deps.sh`
-   * `mvn mvn clean compile assembly:single`
+   * `$ mvn mvn clean compile assembly:single`
 
 This will export a runnable JAR file named `CPPEvolution-analysis.jar` into the target project.
 
@@ -34,8 +34,8 @@ This will export a runnable JAR file named `CPPEvolution-analysis.jar` into the 
 
 To execute the program, just run:
 
-   * `cd target`
-   * java -jar CPPEvolution-analysis.jar <path-to-the-git-repos> 
+   * `$ cd target`
+   * `$ java -jar CPPEvolution-analysis.jar <path-to-the-git-repos>` 
 
 ### List of collect C++ features
 
