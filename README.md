@@ -39,12 +39,12 @@ To execute the program, just run:
 
 ### List of collect C++ features
 
-   -[x] auto and decltype
-   -[x] Lambda Expressions
-   -[X] range-for
-   -[ ] nullptr
-   -[ ] constexpr
-   -[ ] override and final
-   -[ ] enum classes
-   -[ ] attributes
-   -[ ] noexcept
+   - [x] auto and decltype
+   - [x] Lambda Expressions
+   - [X] range-for
+   - [ ] nullptr
+   - [ ] constexpr
+   - [ ] override and final
+   - [ ] enum classes
+   - [ ] attributes
+   - [ ] noexcept
