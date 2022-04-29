@@ -1,7 +1,7 @@
-## CPPEvolutio-analysis
+## CPP Evolution Analysis
 
 This program collects information about the adoption of
-"modern" C++ features in Git repositories. 
+"modern" C++ features in Git repositories.
 
 ### Motivation
 
@@ -12,9 +12,9 @@ were invariably" [1]
    * *auto*
    * *lambdas*
    * *range for*
-   
+
 [1] Bjarne Stroustrup: Thriving in a crowded and changing world: C++ 2006-2020. 70:1-70:168.
-The History of Programming Languages (2020). 
+The History of Programming Languages (2020).
 
 So, we want to understand how and to which extent C++ developers adopt new language
 features (available from C++11 and above). We collect frequency of C++ feature
@@ -35,16 +35,16 @@ This will export a runnable JAR file named `CPPEvolution-analysis.jar` into the 
 To execute the program, just run:
 
    * `$ cd target`
-   * `$ java -jar CPPEvolution-analysis.jar <path-to-the-git-repos>` 
+   * `$ java -jar CPPEvolution-analysis.jar <path-to-the-git-repos>`
 
 ### List of collect C++ features
 
-   [x] auto and decltype
-   [x] Lambda Expressions
-   [X] range-for
-   [ ] nullptr
-   [ ] constexpr
-   [ ] override and final
-   [ ] enum classes
-   [ ] attributes
-   [ ] noexcept
+   -[x] auto and decltype
+   -[x] Lambda Expressions
+   -[X] range-for
+   -[ ] nullptr
+   -[ ] constexpr
+   -[ ] override and final
+   -[ ] enum classes
+   -[ ] attributes
+   -[ ] noexcept
