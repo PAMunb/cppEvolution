@@ -3,34 +3,42 @@ package br.unb.cic.cpp.evolution;
 import br.unb.cic.cpp.evolution.git.RepositoryWalker;
 import br.unb.cic.cpp.evolution.io.CSVUtil;
 import br.unb.cic.cpp.evolution.io.FileUtil;
+import lombok.val;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 
 public class Main {
-    public static void main(String args[]) {
-        try {
-            String path = args[0];
 
-            File f = new File(path);
+    public static void main(final String[] args) {
+        val logger = LoggerFactory.getLogger(Main.class);
+
+        try {
+            val path = args[0];
+            val f = new File(path);
+
             if(f.exists() && f.isDirectory()) {
-                File[] repositories = f.listFiles(File::isDirectory);
-                CSVUtil csv = new CSVUtil(f.getAbsolutePath() + "/../out/results.csv");
+                val repositories = f.listFiles(File::isDirectory);
+                val csv = new CSVUtil(f.getAbsolutePath() + "/../out/results.csv");
+
                 csv.printHeader();
 
-                for(File repository: repositories) {
-                    System.out.println("processing " + repository.getName());
+               if (repositories != null) {
+                    for(File repository: repositories) {
+                        logger.info("processing repository {}", repository.getName());
 
-                    RepositoryWalker walker = new RepositoryWalker(repository.getName(), repository.getAbsolutePath());
+                        val walker = new RepositoryWalker(repository.getName(), repository.getAbsolutePath());
 
-                    walker.walk();
+                        walker.walk();
 
-                    csv.printSummary(walker.getSummary());
-                    FileUtil.exportCode(f.getAbsolutePath() + "/../out/" + repository.getName() + ".md", walker.getObservations());
-                }
+                        csv.printSummary(walker.getSummary());
+                        FileUtil.exportCode(f.getAbsolutePath() + "/../out/" + repository.getName() + ".md", walker.getObservations());
+                    }
+               }
                 csv.close();
+
             }
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }

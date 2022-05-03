@@ -3,9 +3,10 @@ package br.unb.cic.cpp.evolution.git;
 
 import br.unb.cic.cpp.evolution.io.FileUtil;
 import br.unb.cic.cpp.evolution.model.Observation;
-import br.unb.cic.cpp.evolution.model.SummaryOfObservations;
-import br.unb.cic.cpp.evolution.parser.CPPParser;
+import br.unb.cic.cpp.evolution.model.Observations;
+import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
 import br.unb.cic.cpp.evolution.parser.MetricsVisitor;
+import lombok.val;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
@@ -24,25 +25,31 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class RepositoryWalker {
-    private String project;
-    private String path;
+
     private int totalCommits = 0;
-    private Repository repository;
-    private List<Observation> observations;
-    private List<SummaryOfObservations> summary;
-    Logger logger = LoggerFactory.getLogger(getClass());
+
+    private final String project;
+    private final String path;
+
+    private final Repository repository;
+    private final List<Observation> observations;
+    private final List<Observations> summary;
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     public RepositoryWalker(String project, String path) throws Exception {
         this.project = project;
         this.path = path;
+
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
+
         repository = builder.setGitDir(new File(path + "/.git")).readEnvironment().findGitDir().build();
         observations = new ArrayList<>();
         summary = new ArrayList<>();
     }
 
     public void walk() throws Exception {
-        logger.info("Processing " + project);
+        logger.info("processing project {}", project);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(2010, Calendar.JANUARY, 1);
@@ -80,7 +87,7 @@ public class RepositoryWalker {
         //int max = 10;
         for(Date current: commitDates) {
             if(previous == null || (diffInDays(previous, current) >= 7)) {
-                System.out.println(" - revision " + commits.get(current).getName() + " " + current);
+                logger.info(" - revision {} {}",  commits.get(current).getName(), current);
                 collectMetrics(head, current, commits);
                 previous = current;
                 totalCommits++;
@@ -96,10 +103,11 @@ public class RepositoryWalker {
 
         RevCommit commit = repository.parseCommit(id);
 
-        SummaryOfObservations summary = new SummaryOfObservations();
-        summary.setProject(project);
-        summary.setDate(commit.getAuthorIdent().getWhen());
-        summary.setRevision(id.name());
+        Observations commitSummary = new Observations();
+
+        commitSummary.setProject(project);
+        commitSummary.setDate(commit.getAuthorIdent().getWhen());
+        commitSummary.setRevision(id.name());
 
         Git git = new Git(repository);
 
@@ -108,46 +116,47 @@ public class RepositoryWalker {
         int genericError = 0;
         int ioError = 0;
         int parserError = 0;
-        Collection<File> files = FileUtil.listFiles(this.path);
 
-        MetricsVisitor visitor = new MetricsVisitor();
+        val visitor = new MetricsVisitor();
+        val files = FileUtil.listFiles(this.path);
+
         for(File f: files) {
             try {
-                CPPParser parser = new CPPParser();
+                CPlusPlusParser parser = new CPlusPlusParser();
                 IASTTranslationUnit unit = parser.parse(FileUtil.readContent(f));
                 unit.accept(visitor);
-            }
-            catch(IOException e) {
+            } catch(IOException e) {
                 ioError++;
-            }
-            catch(CoreException e) {
+            } catch(CoreException e) {
                 parserError++;
-            }
-            catch(Throwable t) {
+            } catch(Throwable t) {
                 genericError++;
             }
         }
-        git.checkout().setName(head.getName()).call();
-        observations.addAll(visitor.getObservations());
-        summary.setNumberOfLambdaExpressions(visitor.getLambdaExpressions());
-        summary.setNumberOfAutoDeclarations(visitor.getAuto());
-        summary.setNumberOfDeclType(visitor.getDeclType());
-        summary.setNumberOfForRangeStatements(visitor.getRangeForStatement());
-        summary.setNumberOfConstExpressions(visitor.getConstExpr());
-        summary.setNumberOfIfWithInitializerStatements(visitor.getIfStatementWithInitializer());
-        summary.setFiles(files.size());
-        summary.setNumberOfThreadDeclarations(visitor.getThreadDeclarations());
-        summary.setNumberOfSharedFutureDeclarations(0);
-        summary.setNumberOfPromiseDeclarations(visitor.getPromiseDeclarations());
-        summary.setNumberOfAsync(0);
-        summary.setNumberOfClassDeclarations(0);
-        summary.setNumberOfStatements(visitor.getStatements());
-        summary.setError(0, ioError);
-        summary.setError(1, parserError);
-        summary.setError(2, genericError);
-        summary.setElapsedTime(System.currentTimeMillis() - start);
 
-        this.summary.add(summary);
+        git.checkout().setName(head.getName()).call();
+
+        observations.addAll(visitor.getObservations());
+
+        commitSummary.setNumberOfLambdaExpressions(visitor.getLambdaExpressions());
+        commitSummary.setNumberOfAutoDeclarations(visitor.getAuto());
+        commitSummary.setNumberOfDeclType(visitor.getDeclType());
+        commitSummary.setNumberOfForRangeStatements(visitor.getRangeForStatement());
+        commitSummary.setNumberOfConstExpressions(visitor.getConstExpr());
+        commitSummary.setNumberOfIfWithInitializerStatements(visitor.getIfStatementWithInitializer());
+        commitSummary.setFiles(files.size());
+        commitSummary.setNumberOfThreadDeclarations(visitor.getThreadDeclarations());
+        commitSummary.setNumberOfSharedFutureDeclarations(0);
+        commitSummary.setNumberOfPromiseDeclarations(visitor.getPromiseDeclarations());
+        commitSummary.setNumberOfAsync(0);
+        commitSummary.setNumberOfClassDeclarations(0);
+        commitSummary.setNumberOfStatements(visitor.getStatements());
+        commitSummary.setError(0, ioError);
+        commitSummary.setError(1, parserError);
+        commitSummary.setError(2, genericError);
+        commitSummary.setElapsedTime(System.currentTimeMillis() - start);
+
+        this.summary.add(commitSummary);
     }
 
     public long diffInDays(Date previous, Date current) {
@@ -155,14 +164,16 @@ public class RepositoryWalker {
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    private List<RevCommit> heads() throws Exception {
-        List<RevCommit> commits = new ArrayList<>();
-        ObjectId head = repository.resolve( "HEAD" );
+    private List<RevCommit> heads() throws IOException {
+        val commits = new ArrayList<RevCommit>();
+        val head = repository.resolve("HEAD");
+
         commits.add(repository.parseCommit(head));
+
         return commits;
     }
 
-    public List<SummaryOfObservations> getSummary() {
+    public List<Observations> getSummary() {
         return summary;
     }
     public List<Observation> getObservations() { return observations; }

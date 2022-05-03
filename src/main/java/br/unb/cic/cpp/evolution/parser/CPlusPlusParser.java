@@ -10,10 +10,9 @@ import org.eclipse.cdt.core.parser.*;
 import org.eclipse.core.runtime.CoreException;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @NoArgsConstructor
-public class CPPParser {
+public class CPlusPlusParser {
 
     public IASTTranslationUnit parse(String content) throws CoreException {
         val fc = FileContent.create("", content.toCharArray());

@@ -1,6 +1,6 @@
 package br.unb.cic.cpp.evolution.model;
 
-public enum Type {
+public enum ObservationType {
     LAMBDA_EXPRESSION,
     AUTO,
     DECLTYPE,

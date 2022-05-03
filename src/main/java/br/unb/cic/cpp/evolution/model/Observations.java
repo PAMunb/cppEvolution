@@ -3,6 +3,7 @@ package br.unb.cic.cpp.evolution.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SummaryOfObservations {
+public class Observations {
 
     private String project;
     private String revision;
@@ -33,9 +34,10 @@ public class SummaryOfObservations {
     private long elapsedTime;
 
     public String toString() {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        return    project + ","
+        val pattern = "yyyy-MM-dd";
+        val simpleDateFormat = new SimpleDateFormat(pattern);
+
+        return  project + ","
                 + simpleDateFormat.format(date) + ","
                 + revision + ","
                 + files + ","
