@@ -25,7 +25,7 @@ adoption as well as historical trends observing the Git history of the projects.
 
 Clone the repository and then execute:
 
-   * `$ ./install-deps.sh`
+   * `$ ./install-deps.sh` (or simply add the dependencies manually using your IDE)
    * `$ mvn mvn clean compile assembly:single`
 
 This will export a runnable JAR file named `CPPEvolution-analysis.jar` into the target project.
