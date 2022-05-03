@@ -1,7 +1,7 @@
 package br.unb.cic.cpp.evolution;
 
 import br.unb.cic.cpp.evolution.io.FileUtil;
-import br.unb.cic.cpp.evolution.parser.CPPParser;
+import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
 import br.unb.cic.cpp.evolution.parser.MetricsVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.junit.Assert;
@@ -18,7 +18,7 @@ public class MetricsVisitorTest {
             Assert.assertNotNull(f);
 
             String content = FileUtil.readContent(f);
-            CPPParser parser = new CPPParser();
+            CPlusPlusParser parser = new CPlusPlusParser();
 
             IASTTranslationUnit unit = parser.parse(content);
 
@@ -41,7 +41,7 @@ public class MetricsVisitorTest {
             Assert.assertNotNull(f);
 
             String content = FileUtil.readContent(f);
-            CPPParser parser = new CPPParser();
+            CPlusPlusParser parser = new CPlusPlusParser();
 
             IASTTranslationUnit unit = parser.parse(content);
 
@@ -63,7 +63,7 @@ public class MetricsVisitorTest {
             Assert.assertNotNull(f);
 
             String content = FileUtil.readContent(f);
-            CPPParser parser = new CPPParser();
+            CPlusPlusParser parser = new CPlusPlusParser();
 
             IASTTranslationUnit unit = parser.parse(content);
 
@@ -85,7 +85,7 @@ public class MetricsVisitorTest {
             Assert.assertNotNull(f);
 
             String content = FileUtil.readContent(f);
-            CPPParser parser = new CPPParser();
+            CPlusPlusParser parser = new CPlusPlusParser();
 
             IASTTranslationUnit unit = parser.parse(content);
 
@@ -108,7 +108,7 @@ public class MetricsVisitorTest {
             Assert.assertNotNull(f);
 
             String content = FileUtil.readContent(f);
-            CPPParser parser = new CPPParser();
+            CPlusPlusParser parser = new CPlusPlusParser();
 
             IASTTranslationUnit unit = parser.parse(content);
 

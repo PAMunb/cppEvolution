@@ -1,15 +1,15 @@
 package br.unb.cic.cpp.evolution.io;
 
-import br.unb.cic.cpp.evolution.model.SummaryOfObservations;
+import br.unb.cic.cpp.evolution.model.Observations;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class CSVUtil {
-    private PrintWriter pw;
+
+    private final PrintWriter pw;
 
     public CSVUtil(String path) throws IOException  {
         pw = new PrintWriter(new FileWriter(path));
@@ -30,7 +30,7 @@ public class CSVUtil {
                 "future_declarations," +
                 "shared_future_declarations," +
                 "promise_declarations," +
-                "asinc," +
+                "async," +
                 "class_declarations," +
                 "statements," +
                 "error1," +
@@ -39,10 +39,8 @@ public class CSVUtil {
                 "time");
     }
 
-    public void printSummary(List<SummaryOfObservations> summary) {
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        for(SummaryOfObservations s: summary) {
+    public void printSummary(List<Observations> summary) {
+        for(Observations s: summary) {
             pw.println(s.toString());
         }
     }
