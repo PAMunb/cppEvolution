@@ -1,6 +1,7 @@
 package br.unb.cic.cpp.evolution;
 
 import br.unb.cic.cpp.evolution.io.FileUtil;
+import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,24 +13,32 @@ public class FileUtilTest {
 
     @Test
     public void testListFiles() {
-        Collection<File> files = FileUtil.listFiles(getClass().getClassLoader().getResource("sample").getFile());
+        val file = getClass().getClassLoader().getResource("sample").getFile();
+
+        Assert.assertNotNull(file);
+
+        val files = FileUtil.listFiles(file);
+
         Assert.assertEquals(16, files.size());
     }
 
     @Test
     public void testReadContents() {
-
         try {
-            Collection<File> files = FileUtil.listFiles(getClass().getClassLoader().getResource("sample").getFile());
+            val file = getClass().getClassLoader().getResource("sample").getFile();
+
+            Assert.assertNotNull(file);
+
+            val files = FileUtil.listFiles(file);
+
             for(File f: files) {
-                String content = FileUtil.readContent(f);
+                val contents = FileUtil.readContent(f);
+
+                Assert.assertNotNull(contents);
+                Assert.assertFalse(contents.isEmpty());
             }
-            Assert.assertTrue(true);
-        }
-        catch(IOException e) {
+        } catch(IOException e) {
             Assert.fail(e.getMessage());
         }
-
-
     }
 }
