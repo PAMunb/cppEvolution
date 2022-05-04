@@ -27,7 +27,7 @@ public class RepositoryWalkerTask implements Runnable {
             val walker = new RepositoryWalker(repositoryName, repositoryPath);
             walker.walk();
 
-            csv.printSummary(walker.getSummary());
+            csv.print(walker.getSummary());
             FileUtil.exportCode(repositoryObservationsFile, walker.getObservations());
         } catch (Exception e) {
             logger.error("failed to create repository walker, reason {}", e.getMessage());

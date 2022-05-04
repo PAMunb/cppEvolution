@@ -26,24 +26,21 @@ public class Main {
             val repositories = f.listFiles(File::isDirectory);
 
             try {
-                val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv");
-                csv.printHeader();
+                try (val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv")) {
+                    if (repositories != null) {
+                        val cores = Runtime.getRuntime().availableProcessors();
+                        val pool = Executors.newFixedThreadPool(cores + 1);
 
-                if (repositories != null) {
-                    val cores = Runtime.getRuntime().availableProcessors();
-                    val pool = Executors.newFixedThreadPool(cores + 1);
+                        for (File repository : repositories) {
+                            val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
 
-                    for (File repository : repositories) {
-                        val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
+                            pool.submit(new RepositoryWalkerTask(csv, repository.getName(), repository.getAbsolutePath(),
+                                    outputFile));
+                        }
 
-                        pool.submit(new RepositoryWalkerTask(csv, repository.getName(), repository.getAbsolutePath(),
-                                outputFile));
+                        pool.shutdown();
                     }
-
-                    pool.shutdown();
                 }
-                csv.close();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
