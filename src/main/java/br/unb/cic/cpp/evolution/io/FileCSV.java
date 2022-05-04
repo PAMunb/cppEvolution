@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class CSVUtil {
+public class FileCSV {
 
     private final PrintWriter pw;
 
-    public CSVUtil(String path) throws IOException  {
+    public FileCSV(String path) throws IOException  {
         pw = new PrintWriter(new FileWriter(path));
     }
 
@@ -39,7 +39,7 @@ public class CSVUtil {
                 "time");
     }
 
-    public void printSummary(List<Observations> summary) {
+    public synchronized void printSummary(List<Observations> summary) {
         for(Observations s: summary) {
             pw.println(s.toString());
         }
