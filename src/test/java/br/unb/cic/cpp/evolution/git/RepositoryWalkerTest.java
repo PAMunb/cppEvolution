@@ -1,7 +1,8 @@
-package br.unb.cic.cpp.evolution;
+package br.unb.cic.cpp.evolution.git;
 
 import br.unb.cic.cpp.evolution.git.RepositoryWalker;
 import br.unb.cic.cpp.evolution.model.Observations;
+import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ public class RepositoryWalkerTest {
     @Test
     public void testWalker() {
         try {
-            RepositoryWalker walker = new RepositoryWalker("calligra",
+            val walker = new RepositoryWalker("calligra",
                     "/Users/rbonifacio/Documents/papers/cpp+evolution/projects/calligra/");
 
             walker.walk();
@@ -24,7 +25,6 @@ public class RepositoryWalkerTest {
         catch(Exception e) {
             e.printStackTrace();
             Assert.fail();
-            //Assert.fail(e.getMessage());
         }
     }
 }

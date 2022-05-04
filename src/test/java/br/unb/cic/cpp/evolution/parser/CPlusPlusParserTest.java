@@ -1,4 +1,4 @@
-package br.unb.cic.cpp.evolution;
+package br.unb.cic.cpp.evolution.parser;
 
 import br.unb.cic.cpp.evolution.io.FileUtil;
 import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
