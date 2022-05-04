@@ -1,12 +1,10 @@
 package br.unb.cic.cpp.evolution.io;
 
-import junit.framework.TestCase;
 import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.CharArrayWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 public class FileCSVTest {
