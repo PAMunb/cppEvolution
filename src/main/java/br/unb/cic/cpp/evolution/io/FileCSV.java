@@ -2,14 +2,12 @@ package br.unb.cic.cpp.evolution.io;
 
 import br.unb.cic.cpp.evolution.model.Observations;
 import lombok.val;
-import org.eclipse.jgit.util.StringUtils;
 
 import java.io.Closeable;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class FileCSV implements Closeable {
 
