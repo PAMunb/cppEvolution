@@ -1,7 +1,8 @@
-package br.unb.cic.cpp.evolution;
+package br.unb.cic.cpp.evolution.parser;
 
 import br.unb.cic.cpp.evolution.io.FileUtil;
 import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
+import lombok.val;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,9 +16,9 @@ public class CPlusPlusParserTest {
         try {
             String content = "int a; void test() {a++;}";
             CPlusPlusParser parser = new CPlusPlusParser();
+
             Assert.assertNotNull(parser.parse(content));
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             Assert.fail();
         }
     }
@@ -25,14 +26,19 @@ public class CPlusPlusParserTest {
     @Test
     public void testRealPrograms() {
         try {
-            Collection<File> files = FileUtil.listFiles(getClass().getClassLoader().getResource("sample").getFile());
+            val file = getClass().getClassLoader().getResource("sample").getFile();
+
+            Assert.assertNotNull(file);
+
+            Collection<File> files = FileUtil.listFiles(file);
+
             for(File f: files) {
-                String content = FileUtil.readContent(f);
-                CPlusPlusParser parser = new CPlusPlusParser();
-                Assert.assertNotNull((parser.parse(content)));
+                val content = FileUtil.readContent(f);
+                val parser = new CPlusPlusParser();
+
+                Assert.assertNotNull(parser.parse(content));
             }
-        }
-        catch(Exception e) {
+        } catch(Exception e) {
             Assert.fail(e.getMessage());
         }
     }

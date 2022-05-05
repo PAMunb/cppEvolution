@@ -1,45 +1,61 @@
 package br.unb.cic.cpp.evolution;
 
-import br.unb.cic.cpp.evolution.git.RepositoryWalker;
-import br.unb.cic.cpp.evolution.io.CSVUtil;
-import br.unb.cic.cpp.evolution.io.FileUtil;
+import br.unb.cic.cpp.evolution.git.RepositoryWalkerTask;
+import br.unb.cic.cpp.evolution.io.FileCSV;
 import lombok.val;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.Executors;
 
 public class Main {
 
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(final String[] args) {
-        val logger = LoggerFactory.getLogger(Main.class);
-
-        try {
-            val path = args[0];
-            val f = new File(path);
-
-            if(f.exists() && f.isDirectory()) {
-                val repositories = f.listFiles(File::isDirectory);
-                val csv = new CSVUtil(f.getAbsolutePath() + "/../out/results.csv");
-
-                csv.printHeader();
-
-               if (repositories != null) {
-                    for(File repository: repositories) {
-                        logger.info("processing repository {}", repository.getName());
-
-                        val walker = new RepositoryWalker(repository.getName(), repository.getAbsolutePath());
-
-                        walker.walk();
-
-                        csv.printSummary(walker.getSummary());
-                        FileUtil.exportCode(f.getAbsolutePath() + "/../out/" + repository.getName() + ".md", walker.getObservations());
-                    }
-               }
-                csv.close();
-
-            }
-        } catch(Exception e) {
-            e.printStackTrace();
+        if (args.length == 0 || args[0].isEmpty()) {
+            usage();
+            System.exit(1);
         }
+
+        val path = args[0];
+        val f = new File(path);
+
+        if(f.exists() && f.isDirectory()) {
+            val repositories = f.listFiles(File::isDirectory);
+
+            try {
+                try (val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv")) {
+                    if (repositories != null) {
+                        val cores = Runtime.getRuntime().availableProcessors();
+                        val pool = Executors.newFixedThreadPool(cores + 1);
+
+                        for (File repository : repositories) {
+                            val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
+                            val walker = RepositoryWalkerTask.builder()
+                                    .csv(csv)
+                                    .repositoryName(repository.getName())
+                                    .repositoryPath(repository.getAbsolutePath())
+                                    .repositoryObservationsFile(outputFile)
+                                    .build();
+
+                            pool.submit(walker);
+                        }
+
+                        pool.shutdown();
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void usage() {
+        logger.error("java -jar cpp-evolution.jar <path>\n");
+        logger.error("\nArguments\n");
+        logger.error("<path> - The path to a/set of git repository(ies) containing c++ code");
     }
 }
