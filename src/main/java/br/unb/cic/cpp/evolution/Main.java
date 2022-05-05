@@ -17,6 +17,7 @@ public class Main {
     public static void main(final String[] args) {
         if (args.length == 0 || args[0].isEmpty()) {
             usage();
+            System.exit(1);
         }
 
         val path = args[0];
