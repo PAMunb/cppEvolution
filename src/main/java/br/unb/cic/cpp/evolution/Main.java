@@ -33,9 +33,14 @@ public class Main {
 
                         for (File repository : repositories) {
                             val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
+                            val walker = RepositoryWalkerTask.builder()
+                                    .csv(csv)
+                                    .repositoryName(repository.getName())
+                                    .repositoryPath(repository.getAbsolutePath())
+                                    .repositoryObservationsFile(outputFile)
+                                    .build();
 
-                            pool.submit(new RepositoryWalkerTask(csv, repository.getName(), repository.getAbsolutePath(),
-                                    outputFile));
+                            pool.submit(walker);
                         }
 
                         pool.shutdown();
