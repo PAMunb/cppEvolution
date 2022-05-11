@@ -26,36 +26,36 @@ public class Main {
         if(f.exists() && f.isDirectory()) {
             val repositories = f.listFiles(File::isDirectory);
 
-            try {
-                try (val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv")) {
-                    if (repositories != null) {
-                        val cores = Runtime.getRuntime().availableProcessors();
-                        val pool = Executors.newFixedThreadPool(cores + 1);
+            try (val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv")) {
+                if (repositories != null) {
+                    val cores = Runtime.getRuntime().availableProcessors();
+                    val pool = Executors.newFixedThreadPool(cores + 1);
 
-                        for (File repository : repositories) {
-                            val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
-                            val walker = RepositoryWalkerTask.builder()
-                                    .csv(csv)
-                                    .repositoryName(repository.getName())
-                                    .repositoryPath(repository.getAbsolutePath())
-                                    .repositoryObservationsFile(outputFile)
-                                    .build();
+                    for (File repository : repositories) {
+                        val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
+                        val walker = RepositoryWalkerTask.builder()
+                                .csv(csv)
+                                .repositoryName(repository.getName())
+                                .repositoryPath(repository.getAbsolutePath())
+                                .repositoryObservationsFile(outputFile)
+                                .build();
 
-                            pool.submit(walker);
-                        }
-
-                        pool.shutdown();
+                        pool.submit(walker);
                     }
+
+
+                    pool.shutdown();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch(IOException ex) {
+                logger.error("failed to create a CSV, reason {}", ex.getMessage());
+                ex.printStackTrace();
             }
         }
     }
 
     public static void usage() {
-        logger.error("java -jar cpp-evolution.jar <path>\n");
-        logger.error("\nArguments\n");
+        logger.error("java -jar cpp-evolution.jar <path>");
+        logger.error("Arguments");
         logger.error("<path> - The path to a/set of git repository(ies) containing c++ code");
     }
 }

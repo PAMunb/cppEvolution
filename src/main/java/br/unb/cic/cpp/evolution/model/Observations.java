@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.val;
+import org.apache.log4j.helpers.DateTimeDateFormat;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Data
@@ -15,7 +18,7 @@ public class Observations {
 
     private String project;
     private String revision;
-    private Date date;
+    private LocalDate date;
     private long numberOfLambdaExpressions;
     private long numberOfAutoDeclarations;
     private long numberOfDeclType;
@@ -35,10 +38,10 @@ public class Observations {
 
     public String toString() {
         val pattern = "yyyy-MM-dd";
-        val simpleDateFormat = new SimpleDateFormat(pattern);
+        val formatter = DateTimeFormatter.ofPattern(pattern);
 
         return  project + ","
-                + simpleDateFormat.format(date) + ","
+                + formatter.format(date) + ","
                 + revision + ","
                 + files + ","
                 + numberOfLambdaExpressions + ","

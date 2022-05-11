@@ -10,6 +10,8 @@ import lombok.val;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.NoHeadException;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -21,6 +23,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -37,7 +41,8 @@ public class RepositoryWalker {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public RepositoryWalker(String project, String path) throws Exception {
+    public RepositoryWalker(String project, String path) throws IOException {
+
         this.project = project;
         this.path = path;
 
@@ -48,65 +53,62 @@ public class RepositoryWalker {
         summary = new ArrayList<>();
     }
 
-    public void walk() throws Exception {
-        logger.info("processing project {}", project);
+    public void walk() throws IOException, GitAPIException {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2010, Calendar.JANUARY, 1);
-        Date base = calendar.getTime();
+        val git = new Git(repository);
+        val treeName = Constants.R_HEADS + "master";
 
-        Date previous = null;
-
-//        RevWalk walk = new RevWalk(repository);
-//        walk.markStart(heads());
-//
         ObjectId head = repository.resolve(Constants.HEAD);
-//
-//        walk.sort(RevSort.TOPO, true);
-//        walk.sort(RevSort.COMMIT_TIME_DESC, true);
 
-        Git git = new Git(repository);
-
-        String treeName = "refs/heads/master";
-
-        HashMap<Date, ObjectId> commits = new HashMap<>();
-        List<Date> commitDates = new ArrayList<>();
+        val commits = new TreeMap<LocalDate, ObjectId>();
 
         for(RevCommit c: git.log().add(repository.resolve(treeName)).call()) {
-            PersonIdent author = c.getAuthorIdent();
-            Date current = author.getWhen();
-            if(current.compareTo(base) > 0) {
-                commitDates.add(current);
+            val author = c.getAuthorIdent();
+            val date = Calendar.getInstance();
+
+            date.setTime(author.getWhen());
+
+            val current = LocalDate.of(date.get(Calendar.YEAR),
+                    date.get(Calendar.MONTH)+1, date.get(Calendar.DAY_OF_MONTH));
+
+            if(current.isAfter(LocalDate.of(2010, 1, 1))) {
                 commits.put(current, c.toObjectId());
             }
         }
-        Collections.sort(commitDates);
-        System.out.println("Number of commits: " + commits.size());
 
-        //Collections.reverse(commitDates);
-        //int max = 10;
-        for(Date current: commitDates) {
-            if(previous == null || (diffInDays(previous, current) >= 7)) {
-                logger.info(" - revision {} {}",  commits.get(current).getName(), current);
-                collectMetrics(head, current, commits);
-                previous = current;
-                totalCommits++;
-//                max--;
-//                if(max == 0) break;
+        logger.info("{} - number of commits: {}", project, commits.size());
+
+        var previous = commits.firstKey();
+
+        for(Map.Entry<LocalDate, ObjectId> entry : commits.entrySet()) {
+            val date = entry.getKey();
+
+            if(previous.plusDays(7).isBefore(date)) {
+                val hash = commits.get(date).getName();
+
+                logger.info("{} - revision {}", project, hash);
+
+                try {
+                    collectMetrics(head, date, commits);
+                } catch(Exception ex) {
+                    logger.error("{} - failed to collect metrics for revision {}", project, hash);
+                }
+                previous = date;
             }
         }
+
+        totalCommits += commits.size();
     }
 
-    private void collectMetrics(ObjectId head, Date current, HashMap<Date, ObjectId> commits) throws Exception {
-        Long start = System.currentTimeMillis();
-        ObjectId id = commits.get(current);
+    private void collectMetrics(ObjectId head, LocalDate current, Map<LocalDate, ObjectId> commits) throws Exception {
 
-        RevCommit commit = repository.parseCommit(id);
+        val start = System.currentTimeMillis();
+        val id = commits.get(current);
 
-        Observations commitSummary = new Observations();
+        val commitSummary = new Observations();
 
         commitSummary.setProject(project);
-        commitSummary.setDate(commit.getAuthorIdent().getWhen());
+        commitSummary.setDate(current);
         commitSummary.setRevision(id.name());
 
         Git git = new Git(repository);
@@ -129,7 +131,7 @@ public class RepositoryWalker {
                 ioError++;
             } catch(CoreException e) {
                 parserError++;
-            } catch(Throwable t) {
+            } catch(Exception t) {
                 genericError++;
             }
         }
@@ -159,12 +161,8 @@ public class RepositoryWalker {
         this.summary.add(commitSummary);
     }
 
-    public long diffInDays(Date previous, Date current) {
-        long diff = Math.abs(previous.getTime() - current.getTime());
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    }
-
     private List<RevCommit> heads() throws IOException {
+
         val commits = new ArrayList<RevCommit>();
         val head = repository.resolve("HEAD");
 
