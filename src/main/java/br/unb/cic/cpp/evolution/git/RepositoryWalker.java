@@ -86,7 +86,7 @@ public class RepositoryWalker {
             if(previous.plusDays(7).isBefore(date)) {
                 val hash = commits.get(date).getName();
 
-                logger.info("{} - revision {}", project, hash);
+                logger.info("{} - revision {} {}", project, hash, date);
 
                 try {
                     collectMetrics(head, date, commits);
