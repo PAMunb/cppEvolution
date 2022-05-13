@@ -32,7 +32,7 @@ public class RepositoryWalker {
     private final String path;
 
     private final Repository repository;
-    private final List<Observation> observations;
+    private final Set<Observation> observations;
     private final List<Observations> summary;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -44,7 +44,7 @@ public class RepositoryWalker {
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
 
         repository = builder.setGitDir(new File(path + "/.git")).readEnvironment().findGitDir().build();
-        observations = new ArrayList<>();
+        observations = new HashSet<>();
         summary = new ArrayList<>();
     }
 
@@ -176,5 +176,5 @@ public class RepositoryWalker {
     public List<Observations> getSummary() {
         return summary;
     }
-    public List<Observation> getObservations() { return observations; }
+    public Set<Observation> getObservations() { return observations; }
 }

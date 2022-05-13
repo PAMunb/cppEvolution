@@ -1,15 +1,15 @@
 package br.unb.cic.cpp.evolution;
 
-import br.unb.cic.cpp.evolution.git.RepositoryWalkerTask;
-import br.unb.cic.cpp.evolution.io.FileCSV;
-import lombok.val;
+import java.io.File;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import br.unb.cic.cpp.evolution.git.RepositoryWalkerTask;
+import br.unb.cic.cpp.evolution.io.FileCSV;
+import lombok.val;
 
 public class Main {
 
