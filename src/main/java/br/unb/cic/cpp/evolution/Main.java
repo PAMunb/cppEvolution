@@ -1,7 +1,9 @@
 package br.unb.cic.cpp.evolution;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -33,18 +35,22 @@ public class Main {
 					val cores = Runtime.getRuntime().availableProcessors();
 					val pool = Executors.newFixedThreadPool(cores + 1);
 
+                    val futures = new ArrayList<Future>();
+
 					for (File repository : repositories) {
 						val outputFile = f.getAbsolutePath() + "/../out/" + repository.getName() + ".md";
-						val walker = RepositoryWalkerTask.builder().csv(csv).repositoryName(repository.getName())
+						val walker= RepositoryWalkerTask.builder()
+                                .csv(csv)
+                                .repositoryName(repository.getName())
 								.repositoryPath(repository.getAbsolutePath()).repositoryObservationsFile(outputFile)
 								.build();
 
-						pool.submit(walker);
+						futures.add(pool.submit(walker));
 					}
-					pool.shutdown();
-					pool.awaitTermination(1, TimeUnit.MINUTES);
-					csv.close();
+                    // We have to synchronize all threads before a call to csv.close()
+                    for(Future future: futures) { future.get(); }
 
+					csv.close();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
