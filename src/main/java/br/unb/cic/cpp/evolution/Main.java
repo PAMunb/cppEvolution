@@ -51,7 +51,7 @@ public class Main {
                     for (Future future : futures) {
                         future.get();
                     }
-
+					pool.shutdown();
                     csv.close();
                 }
             } catch (Exception e) {
