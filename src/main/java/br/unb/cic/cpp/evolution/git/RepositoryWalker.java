@@ -81,7 +81,7 @@ public class RepositoryWalker {
             }
         }
         Collections.sort(commitDates);
-        System.out.println("Number of commits: " + commits.size());
+        logger.info("Number of commits {} ", commits.size());
 
         //Collections.reverse(commitDates);
         //int max = 10;
