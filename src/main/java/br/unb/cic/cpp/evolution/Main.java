@@ -43,7 +43,6 @@ public class Main {
                         pool.submit(walker);
                     }
 
-
                     pool.shutdown();
                 }
             } catch(IOException ex) {
