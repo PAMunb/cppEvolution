@@ -1,12 +1,5 @@
 package br.unb.cic.cpp.evolution.io;
 
-import br.unb.cic.cpp.evolution.model.Observation;
-import br.unb.cic.cpp.evolution.model.Observations;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.val;
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +7,15 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
+
+import br.unb.cic.cpp.evolution.model.Observation;
+import br.unb.cic.cpp.evolution.model.Observations;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.val;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class FileUtil {
@@ -66,7 +68,7 @@ public class FileUtil {
         }
     }
 
-    public static void exportCode(String path, List<Observation> observations) throws IOException {
+    public static void exportCode(String path, Set<Observation> observations) throws IOException {
         try (val pw = new PrintWriter(new FileWriter(path))) {
             for (Observation o : observations) {
                 pw.println(String.format("#### %s \n\n", o.getType().toString().replace("_", " ")));
