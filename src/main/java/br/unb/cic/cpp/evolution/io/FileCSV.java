@@ -11,7 +11,7 @@ import java.util.*;
 
 public class FileCSV implements Closeable {
 
-    private PrintWriter pw;
+    private final PrintWriter pw;
 
     private final Map<String, List<String>> entries = new LinkedHashMap<>();
 
@@ -27,14 +27,10 @@ public class FileCSV implements Closeable {
         init();
     }
 
-    public synchronized void print(List<Observations> summary) {
+    public void print(List<Observations> summary) {
         for(Observations s: summary) {
             pw.println(s.toString());
         }
-    }
-
-    public void close() {
-        pw.close();
     }
 
     private void init() {
@@ -65,4 +61,7 @@ public class FileCSV implements Closeable {
         pw.println(keys);
     }
 
+    public void close() {
+        pw.close();
+    }
 }
