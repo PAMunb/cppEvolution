@@ -18,9 +18,20 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(final String[] args) {
+        int threads = 0;
+
         if (args.length == 0 || args[0].isEmpty()) {
             usage();
             System.exit(1);
+        }
+        else if(args.length == 2 && args[1].startsWith("--threads=")) {
+            try {
+                threads = Integer.parseInt(args[1] .replace("--threads=", ""));
+            }
+            catch(Exception e) {
+                usage();
+                System.exit(2);
+            }
         }
 
         val path = args[0];
@@ -32,8 +43,8 @@ public class Main {
             try {
                 val csv = new FileCSV(f.getAbsolutePath() + "/../out/results.csv");
                 if (repositories != null) {
-                    val cores = Runtime.getRuntime().availableProcessors();
-                    val pool = Executors.newFixedThreadPool(cores + 1);
+                    val cores = threads == 0? Runtime.getRuntime().availableProcessors() : threads;
+                    val pool = Executors.newFixedThreadPool(cores);
 
                     val futures = new ArrayList<Future>();
 

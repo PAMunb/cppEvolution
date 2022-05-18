@@ -81,13 +81,19 @@ public class RepositoryWalker {
             }
         }
         Collections.sort(commitDates);
+        long total = commitDates.size();
         logger.info("Number of commits {} ", commits.size());
 
         //Collections.reverse(commitDates);
         //int max = 10;
+        long traversed = 0;
         for(Date current: commitDates) {
+            if(traversed % 500 == 0) {
+                logger.info(" - {}: visiting commit {} of {}",  project, traversed, total);
+            }
+            traversed++;
             if(previous == null || (diffInDays(previous, current) >= 7)) {
-                logger.info(" - revision {} {}",  commits.get(current).getName(), current);
+
                 collectMetrics(head, current, commits);
                 previous = current;
                 totalCommits++;
