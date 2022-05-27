@@ -78,22 +78,17 @@ public class RepositoryWalker {
 
         logger.info("{} - number of commits: {}", project, commits.size());
 
-        var previous = commits.firstKey();
-
         for(Map.Entry<LocalDate, ObjectId> entry : commits.entrySet()) {
             val date = entry.getKey();
 
-            if(previous.plusDays(7).isBefore(date)) {
-                val hash = commits.get(date).getName();
+            val hash = commits.get(date).getName();
 
-                logger.info("{} - revision {} {}", project, hash, date);
+            logger.info("{} - revision {} {}", project, hash, date);
 
-                try {
-                    collectMetrics(head, date, commits);
-                } catch(Exception ex) {
-                    logger.error("{} - failed to collect metrics for revision {}", project, hash);
-                }
-                previous = date;
+            try {
+                collectMetrics(head, date, commits);
+            } catch(Exception ex) {
+                logger.error("{} - failed to collect metrics for revision {}", project, hash);
             }
         }
 
