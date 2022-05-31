@@ -57,13 +57,7 @@ public class RepositoryWalker {
 
         Date previous = null;
 
-//        RevWalk walk = new RevWalk(repository);
-//        walk.markStart(heads());
-//
         ObjectId head = repository.resolve(Constants.HEAD);
-//
-//        walk.sort(RevSort.TOPO, true);
-//        walk.sort(RevSort.COMMIT_TIME_DESC, true);
 
         Git git = new Git(repository);
 
@@ -93,12 +87,9 @@ public class RepositoryWalker {
             }
             traversed++;
             if(previous == null || (diffInDays(previous, current) >= 7)) {
-
                 collectMetrics(head, current, commits);
                 previous = current;
                 totalCommits++;
-//                max--;
-//                if(max == 0) break;
             }
         }
     }
@@ -115,29 +106,29 @@ public class RepositoryWalker {
         commitSummary.setDate(commit.getAuthorIdent().getWhen());
         commitSummary.setRevision(id.name());
 
-        Git git = new Git(repository);
-
-        git.checkout().setName(id.getName()).call();
-
         int genericError = 0;
         int ioError = 0;
         int parserError = 0;
 
+        Git git = new Git(repository);
+
         val visitor = new MetricsVisitor();
         val files = FileUtil.listFiles(this.path);
 
-        for(File f: files) {
-            try {
+        try {
+            git.checkout().setName(id.getName()).call();
+
+            for(File f: files) {
                 CPlusPlusParser parser = new CPlusPlusParser();
                 IASTTranslationUnit unit = parser.parse(FileUtil.readContent(f));
                 unit.accept(visitor);
-            } catch(IOException e) {
-                ioError++;
-            } catch(CoreException e) {
-                parserError++;
-            } catch(Throwable t) {
-                genericError++;
             }
+        } catch(IOException e) {
+            ioError++;
+        } catch(CoreException e) {
+            parserError++;
+        } catch(Throwable t) {
+            genericError++;
         }
 
         git.checkout().setName(head.getName()).call();
