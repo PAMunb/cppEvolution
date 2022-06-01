@@ -48,12 +48,8 @@ public class RepositoryWalker {
         summary = new ArrayList<>();
     }
 
-    public void walk() throws Exception {
+    public void walk(Date initDate, Date endDate, int step) throws Exception {
         logger.info("processing project {}", project);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2010, Calendar.JANUARY, 1);
-        Date base = calendar.getTime();
 
         Date previous = null;
 
@@ -75,7 +71,7 @@ public class RepositoryWalker {
         for(RevCommit c: git.log().add(repository.resolve(treeName)).call()) {
             PersonIdent author = c.getAuthorIdent();
             Date current = author.getWhen();
-            if(current.compareTo(base) > 0) {
+            if(current.compareTo(initDate) >= 0 && current.compareTo(endDate) <= 0) {
                 commitDates.add(current);
                 commits.put(current, c.toObjectId());
             }
@@ -92,7 +88,7 @@ public class RepositoryWalker {
                 logger.info(" - {}: visiting commit {} of {}",  project, traversed, total);
             }
             traversed++;
-            if(previous == null || (diffInDays(previous, current) >= 7)) {
+            if(previous == null || (diffInDays(previous, current) >= step)) {
 
                 collectMetrics(head, current, commits);
                 previous = current;

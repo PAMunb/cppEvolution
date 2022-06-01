@@ -1,7 +1,10 @@
 package br.unb.cic.cpp.evolution;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -17,22 +20,34 @@ public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         int threads = 0;
+
+        Date initialDate = formatter.parse("01-01-2010");
+        Date finalDate = Calendar.getInstance().getTime();
+        int step = 7;
 
         if (args.length == 0 || args[0].isEmpty()) {
             usage();
             System.exit(1);
         }
-        else if(args.length == 2 && args[1].startsWith("--threads=")) {
-            try {
-                threads = Integer.parseInt(args[1] .replace("--threads=", ""));
-            }
-            catch(Exception e) {
-                usage();
-                System.exit(2);
+        for(int i = 1; i < args.length; i++) {
+            if (args[i].startsWith("--threads")) {
+                threads = Integer.parseInt(args[i].replace("--threads=", ""));
+            } else if (args[i].startsWith("--date-init=")) {
+                initialDate = formatter.parse(args[i].replace("--date-init=", ""));
+            } else if (args[i].startsWith("--date-end=")) {
+                finalDate = formatter.parse(args[i].replace("--date-end=", ""));
+            } else if (args[i].startsWith("--step=")) {
+                step = Integer.parseInt(args[i].replace("--step=", ""));
             }
         }
+
+        logger.info("Init date {}", initialDate.toString());
+        logger.info("End date {}", finalDate.toString());
+        logger.info("Step {}", step);
+
 
         val path = args[0];
         val f = new File(path);
@@ -54,6 +69,9 @@ public class Main {
                                 .csv(csv)
                                 .repositoryName(repository.getName())
                                 .repositoryPath(repository.getAbsolutePath()).repositoryObservationsFile(outputFile)
+                                .initDate(initialDate)
+                                .endDate(finalDate)
+                                .step(step)
                                 .build();
 
                         futures.add(pool.submit(walker));

@@ -9,6 +9,8 @@ import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 @Builder
 @RequiredArgsConstructor
 public class RepositoryWalkerTask implements Runnable {
@@ -18,6 +20,9 @@ public class RepositoryWalkerTask implements Runnable {
     private final String repositoryName;
     private final String repositoryPath;
     private final String repositoryObservationsFile;
+    private final Date initDate;
+    private final Date endDate;
+    private final int step;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -27,7 +32,7 @@ public class RepositoryWalkerTask implements Runnable {
 
         try {
             val walker = new RepositoryWalker(repositoryName, repositoryPath);
-            walker.walk();
+            walker.walk(initDate, endDate, step);
 
             csv.print(walker.getSummary());
             FileUtil.exportCode(repositoryObservationsFile, walker.getObservations());
