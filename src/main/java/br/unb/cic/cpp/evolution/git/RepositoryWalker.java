@@ -15,6 +15,7 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
+import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,67 +54,36 @@ public class RepositoryWalker {
 
         Date previous = null;
 
-//        RevWalk walk = new RevWalk(repository);
-//        walk.markStart(heads());
-//
-        ObjectId head = repository.resolve(Constants.HEAD);
-//
-//        walk.sort(RevSort.TOPO, true);
-//        walk.sort(RevSort.COMMIT_TIME_DESC, true);
-
-        Git git = new Git(repository);
-
         String treeName = "refs/heads/master";
+        ObjectId head = repository.resolve(Constants.HEAD);
 
-        HashMap<Date, ObjectId> commits = new HashMap<>();
-        List<Date> commitDates = new ArrayList<>();
+        try(RevWalk revWalk = new RevWalk(repository)) {
+            ObjectId commitId = repository.resolve(treeName);
+            revWalk.markStart( revWalk.parseCommit( commitId ) );
 
-        for(RevCommit c: git.log().add(repository.resolve(treeName)).call()) {
-            PersonIdent author = c.getAuthorIdent();
-            Date current = author.getWhen();
-            if(current.compareTo(initDate) >= 0 && current.compareTo(endDate) <= 0) {
-                commitDates.add(current);
-                commits.put(current, c.toObjectId());
-            }
-        }
-        Collections.sort(commitDates);
-        long total = commitDates.size();
-        logger.info("Number of commits {} ", commits.size());
-
-        //Collections.reverse(commitDates);
-        //int max = 10;
-        long traversed = 0;
-        for(Date current: commitDates) {
-            if(traversed % 500 == 0) {
-                logger.info(" - {}: visiting commit {} of {}",  project, traversed, total);
-            }
-            traversed++;
-            if(previous == null || (diffInDays(previous, current) >= step)) {
-
-                collectMetrics(head, current, commits);
-                previous = current;
-                totalCommits++;
-//                max--;
-//                if(max == 0) break;
+            long traversed = 0;
+            for( RevCommit commit: revWalk) {
+                if(traversed % 500 == 0) {
+                    logger.info(" - {}: visiting commit {}",  project, traversed);
+                }
+                traversed++;
+                collectMetrics(head, commit);
             }
         }
     }
 
-    private void collectMetrics(ObjectId head, Date current, HashMap<Date, ObjectId> commits) throws Exception {
+    private void collectMetrics(ObjectId head, RevCommit commit) throws Exception {
         Long start = System.currentTimeMillis();
-        ObjectId id = commits.get(current);
-
-        RevCommit commit = repository.parseCommit(id);
 
         Observations commitSummary = new Observations();
 
         commitSummary.setProject(project);
         commitSummary.setDate(commit.getAuthorIdent().getWhen());
-        commitSummary.setRevision(id.name());
+        commitSummary.setRevision(commit.getId().name());
 
         Git git = new Git(repository);
 
-        git.checkout().setName(id.getName()).call();
+        git.checkout().setName(commit.getId().getName()).call();
 
         int genericError = 0;
         int ioError = 0;
