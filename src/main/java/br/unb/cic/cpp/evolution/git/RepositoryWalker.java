@@ -1,20 +1,21 @@
 package br.unb.cic.cpp.evolution.git;
 
-import br.unb.cic.cpp.evolution.osValidation;
-import br.unb.cic.cpp.evolution.io.FileUtil;
-import br.unb.cic.cpp.evolution.model.Observation;
-import br.unb.cic.cpp.evolution.model.Observations;
-import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
-import br.unb.cic.cpp.evolution.parser.MetricsVisitor;
-import lombok.val;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.api.errors.CheckoutConflictException;
-import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidRefNameException;
-import org.eclipse.jgit.api.errors.RefAlreadyExistsException;
-import org.eclipse.jgit.api.errors.RefNotFoundException;
+import org.eclipse.jgit.api.ResetCommand.ResetType;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -25,10 +26,13 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import br.unb.cic.cpp.evolution.osValidation;
+import br.unb.cic.cpp.evolution.io.FileUtil;
+import br.unb.cic.cpp.evolution.model.Observation;
+import br.unb.cic.cpp.evolution.model.Observations;
+import br.unb.cic.cpp.evolution.parser.CPlusPlusParser;
+import br.unb.cic.cpp.evolution.parser.MetricsVisitor;
+import lombok.val;
 
 public class RepositoryWalker {
 
@@ -190,6 +194,8 @@ public class RepositoryWalker {
 //                if(max == 0) break;
 			}
 		}
+		
+		git.close();
 	}
 
 	private void collectMetrics(ObjectId head, Date current, HashMap<Date, ObjectId> commits) throws Exception {
@@ -204,8 +210,7 @@ public class RepositoryWalker {
 		commitSummary.setDate(commit.getAuthorIdent().getWhen());
 		commitSummary.setRevision(id.name());
 
-		Git git = new Git(repository);
-
+		Git git = new Git(repository);		
 		git.checkout().setName(id.getName()).call();
 
 		int genericError = 0;
@@ -229,6 +234,9 @@ public class RepositoryWalker {
 			}
 		}
 
+		//this code removes all local changes and allows error-free checkout.
+		git.reset().setMode(ResetType.HARD).call();
+		
 		git.checkout().setName(head.getName()).call();
 
 		observations.addAll(visitor.getObservations());
@@ -252,6 +260,8 @@ public class RepositoryWalker {
 		commitSummary.setElapsedTime(System.currentTimeMillis() - start);
 
 		this.summary.add(commitSummary);
+		
+		git.close();
 	}
 
 	public long diffInDays(Date previous, Date current) {
