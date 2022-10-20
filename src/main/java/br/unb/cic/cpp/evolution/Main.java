@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +88,7 @@ public class Main {
 					for (Future future : futures) {
 						future.get();
 					}
-					pool.shutdown();
+          pool.shutdown();
 					csv.close();
 				}
 			} catch (Exception e) {

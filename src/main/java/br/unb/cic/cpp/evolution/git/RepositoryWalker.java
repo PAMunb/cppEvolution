@@ -151,6 +151,7 @@ public class RepositoryWalker {
 
 		Date previous = null;
 
+
 //        RevWalk walk = new RevWalk(repository);
 //        walk.markStart(heads());
 //
