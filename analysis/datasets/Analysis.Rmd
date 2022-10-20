@@ -1,0 +1,196 @@
+---
+title: "CPPEvolution"
+author: "Rodrigo Bonifácio et al."
+date: "6/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sqldf)
+library(stringr)
+library(reshape2)
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(lattice)
+
+setwd(".")
+```
+
+## Load the KCalc dataset
+
+```{r load-kcalc}
+# "lambda"              "auto"               
+# "range_for"           "const_expr"          "if_with_initializer"
+
+ds <- read.csv("full-results.csv", head=T, sep=",")
+
+ds$date <- as.Date(ds$date)
+
+projects <- sqldf("select project, 
+                          min(date) as first_revision, 
+                          max(date) as last_revision, 
+                          count(revision) as commits
+                    from ds
+                    group by project", method = "name__class")
+
+
+projects
+```
+
+### Research Question 1
+
+```{r rq1}
+
+rq1 <- sqldf("select ds.project, date, lambda, auto, range_for, if_with_initializer,          
+                      thread_declarations,future_declarations, const_expr,
+                      shared_future_declarations,promise_declarations,async,statements,files
+              from ds, projects p
+              where ds.project = p.project
+                and ds.date = p.last_revision", method = "name__class")
+
+rq1 <- melt(rq1, id.vars=c("project", "date", "statements", "files"), value.name = "total", variable.name="feature")
+
+# colnames(rq1)
+
+rq5 <- sqldf("select project, feature, total
+                      from rq1 
+                      where feature in ('auto','lambda', 'range_for')
+                      order by 2")
+
+pdf("distribution.pdf",         # File name
+    width = 8, height = 7, # Width and height in inches
+    bg = "white")
+
+bwplot(total~feature,data=rq5,xlab="Features",ylab="Total")
+
+# bwplot(total~feature,data=rq5,xlab="Features",ylab="Total", md = tapply(rq5$total, rq5$feature, median),
+#        panel = function(x, y, md, ...) {
+#          panel.bwplot(x, y, ...)
+#          panel.text(x = 1:4, y = md, labels = round(md, 2), pos = 3)
+#        })
+
+dev.off()
+
+rq5 %>%
+group_by(feature)%>% 
+summarise(Mean=mean(total), Max=max(total), Min=min(total), Median=median(total), Std=sd(total))
+
+sqldf("select feature, sum(total)
+       from rq1 
+       group by feature 
+       order by 1")
+
+rq1_summary <- sqldf("select feature, (100*count(distinct project))/99.0 percentage
+                      from rq1 
+                      where total > 0 
+                      group by feature", method = "name__class")
+
+rq1_summary
+``` 
+
+
+rq6 <- sqldf("select project, feature, statements, files, total
+                      from rq1 
+                      where feature in ('auto','lambda', 'range_for')
+                      order by 2")
+
+rq6%>%
+group_by(feature)%>% 
+summarise(cor1=cor(statements,total,method="spearman"), cor2=cor(files,total,method="spearman"))
+
+
+### Reseach Question 2
+
+   * When developers started using a feature
+   
+
+
+```{r}
+cd <- as.Date("2010-01-01")
+maxDate <- as.Date("2022-06-01")
+
+accm = ds[FALSE,]
+nrow(accm)
+while(cd < maxDate) {
+  lastCommit <- fn$sqldf("select project, max(date) as date
+                       from ds 
+                       where date < '$cd'
+                       group by project");
+  
+  
+  
+  monthYear = format(cd, "%Y-%m");
+  
+  snapshot <- fn$sqldf("select ds.*, '$monthYear' as monthYear
+                        from ds, lastCommit lc
+                        where ds.project = lc.project 
+                          and ds.date = lc.date");
+  
+  
+  accm <- rbind(accm, snapshot);
+  
+  # cd <- cd + 7;
+  cd <- ymd(cd %m+% months(1))
+}
+
+rq2 <- sqldf("select project, monthYear, lambda, auto, range_for, if_with_initializer,          
+                      thread_declarations,future_declarations, const_expr,
+                      shared_future_declarations,promise_declarations,async
+              from accm")
+
+sqldf("select count(distinct project) from accm")
+
+rq2 <- melt(rq2, id.vars=c("project", "monthYear"), value.name = "total", variable.name="feature")
+
+
+sqldf("select feature, min(monthYear)
+       from rq2
+       where total > 0
+       group by feature")
+```
+
+   * Tendency on the adoption of new features 
+   
+```{r}
+ts <- sqldf("select feature, monthYear, sum(total) total
+       from rq2 
+       group by feature, monthYear 
+       order by 1,2")
+
+ts$monthYear = as.Date(paste(ts$monthYear,"-01",sep=""))
+
+
+xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'auto',], type = "l")
+xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'lambda',], type = "l")
+xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'range_for',], type = "l")
+
+# pdf("auto.pdf",         # File name
+#     width = 8, height = 7, # Width and height in inches
+#     bg = "white")
+# xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'auto',], type = "l")
+# dev.off()
+# 
+# pdf("lambda.pdf",         # File name
+#     width = 8, height = 7, # Width and height in inches
+#     bg = "white")
+# xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'lambda',], type = "l")
+# dev.off()
+# 
+# pdf("range_for.pdf",         # File name
+#     width = 8, height = 7, # Width and height in inches
+#     bg = "white")
+# xyplot(total ~ monthYear | feature, data=ts[ts$feature == 'range_for',], type = "l")
+# dev.off()
+
+
+# we have to analyse these cases. 
+
+## 4700          kdevelop                auto   2016-09        539
+## 4701          kdevelop                auto   2016-10         18      (* talvez nao tenha ocorrido commits aqui *)
+## 4702          kdevelop                auto   2016-11          6
+## 4703          kdevelop                auto   2016-12       1094
+## 4704          kdevelop                auto   2017-01       1063
+## 4705          kdevelop                auto   2017-02        597
+```
