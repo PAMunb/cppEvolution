@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +17,7 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.ResetCommand.ResetType;
+import org.eclipse.jgit.lib.AnyObjectId;
 import org.eclipse.jgit.lib.Constants;
 import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.PersonIdent;
@@ -159,12 +161,15 @@ public class RepositoryWalker {
 
 		Git git = new Git(repository);
 
-		String treeName = "refs/heads/master";
-
+		Map<Boolean, AnyObjectId> branches = new HashMap<>();
+		branches.put(repository.resolve("refs/heads/master") != null, repository.resolve("refs/heads/master"));
+		branches.put(repository.resolve("refs/heads/main") != null, repository.resolve("refs/heads/main"));
+		
 		HashMap<Date, ObjectId> commits = new HashMap<>();
 		List<Date> commitDates = new ArrayList<>();
-
-		for (RevCommit c : git.log().add(repository.resolve(treeName)).call()) {
+		
+		
+		for (RevCommit c : git.log().add(branches.get(true)).call()) {
 			PersonIdent author = c.getAuthorIdent();
 			Date current = author.getWhen();
 			if (current.compareTo(initDate) >= 0 && current.compareTo(endDate) <= 0) {
