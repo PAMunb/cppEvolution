@@ -1,0 +1,134 @@
+---
+title: "CPPEvolution"
+author: "Rodrigo Bonifácio et al."
+date: "6/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sqldf)
+library(stringr)
+library(reshape2)
+library(ggplot2)
+library(lubridate)
+library(lattice)
+library(ggfortify)
+setwd(".")
+```
+
+## Load the KCalc dataset
+
+```{r load-kcalc}
+# "lambda"              "auto"               
+# "range_for"           "const_expr"          "if_with_initializer"
+
+ds <- read.csv("full-results.csv", head=T, sep=",")
+
+ds$date <- as.Date(ds$date)
+
+projects <- sqldf("select project, 
+                          min(date) as first_revision, 
+                          max(date) as last_revision, 
+                          count(revision) as commits
+                    from ds
+                    group by project", method = "name__class")
+
+
+projects
+```
+
+```{r transform-data}
+cd <- as.Date("2010-01-01")
+maxDate <- as.Date("2022-06-01")
+
+accm = ds[FALSE,]
+nrow(accm)
+while(cd <= maxDate) {
+  lastCommit <- fn$sqldf("select project, max(date) as date
+                       from ds 
+                       where date < '$cd' and date < '$maxDate'
+                       group by project");
+  
+  
+  
+  monthYear = format(cd, "%Y-%m");
+  
+  snapshot <- fn$sqldf("select ds.*, '$cd' as cd
+                        from ds, lastCommit lc
+                        where ds.project = lc.project 
+                              and ds.date = lc.date");
+  
+  
+  accm <- rbind(accm, snapshot);
+  
+  #cd <- cd + 7;
+  cd <- ymd(cd %m+% months(1))
+}
+
+summaryds = sqldf("select cd, sum(auto) totalAuto, sum(lambda) totalLambda, sum(range_for) totalRangeFor from accm group by cd order by 1")
+nrow(summaryds) 
+
+summaryts = ts(summaryds$totalAuto, 
+            freq=365.25/30, 
+            start=decimal_date(ymd("2010-01-01")))
+
+#autots = ts(autods$total, start=as.Date("2010-01-01"),frequency=7)
+
+autoplot(summaryts) +
+  ggtitle("Use of auto declaration") +
+  ylab("Total") +
+  xlab("Year")
+
+summaryts %>% decompose(type="multiplicative") %>% autoplot() + theme_bw()
+
+dec = decompose(summaryts, type = "multiplicative") 
+
+autoplot(dec$trend) + theme_bw()
+
+xyplot(dec$trend, ylab="Trend of auto-declaration adoption")
+
+
+
+summaryts = ts(summaryds$totalRangeFor, 
+            freq=365.25/30, 
+            start=decimal_date(ymd("2010-01-01")))
+
+#autots = ts(autods$total, start=as.Date("2010-01-01"),frequency=7)
+
+autoplot(summaryts) +
+  ggtitle("Use of lambda expressions") +
+  ylab("Total") +
+  xlab("Year")
+
+summaryts %>% decompose(type="multiplicative") %>% autoplot() + theme_bw()
+
+dec = decompose(summaryts, type = "multiplicative") 
+
+autoplot(dec$trend) + theme_bw()
+
+xyplot(dec$trend, ylab="Trend of lambda expression adoption")
+
+
+summaryts = ts(summaryds$totalLambda, 
+            freq=365.25/30, 
+            start=decimal_date(ymd("2010-01-01")))
+
+#autots = ts(autods$total, start=as.Date("2010-01-01"),frequency=7)
+
+autoplot(summaryts) +
+  ggtitle("Use of lambda expressions") +
+  ylab("Total") +
+  xlab("Year")
+
+summaryts %>% decompose(type="multiplicative") %>% autoplot() + theme_bw()
+
+dec = decompose(summaryts, type = "multiplicative") 
+
+autoplot(dec$trend) + theme_bw()
+
+xyplot(dec$trend, ylab="Trend of range-for statement adoption")
+
+
+
+```

@@ -48,3 +48,23 @@ To execute the program, just run:
    - [ ] enum classes
    - [ ] attributes
    - [ ] noexcept
+
+
+## CPP Commits Miner
+
+This tool are created to analyse the output .csv exported after the execution of CPP evolution analysis. You need to extract the zip file in analysis folder and import a maven project called cpp-commits-miner.
+
+
+### Run
+
+To run cpp-commits-miner you need to pass the path of full folder that contain the file "full-results.csv".
+This file is located in "./analysis/out/full-results.csv".
+
+
+## Other Scripts
+
+All of our scripts are located in analysis folder in this repository.
+
+- The file clone_projects.py can be used to clone all repositories analysed in our study.
+
+- All Scripts R are located in "./analysis/datasets/" in this repository.

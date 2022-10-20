@@ -1,0 +1,730 @@
+Successfully wrote to the file.
+Analyse case of - AKONADI - auto addtions
+Analyse case of - AKONADI - ranged-for addtions
+akonadi: 6
+akonadi,2016-12-16,ab931cfeb40ff89293ad18e194060f7f8a092d67,28,2016-12-17,46badf63d00f46cdb8ffcb2ff45791d4a6d63173,128,ranged-for,addtions
+1
+Analyse case of - AKONADI - auto addtions
+akonadi: 70
+akonadi,2017-04-23,2b54f06bbcb798d0f85ccb72fd93d44dc024a91d,161,2017-04-23,a275359f0e6f6015b6d3a09b41a90a40bbf5b6ec,344,auto,addtions
+akonadi,2017-04-23,5da66a918ca84644fb431bf0f7e7b41d688a974a,161,2017-04-23,b7370915ed32cd272dc764bd1cbe10b5e653c3ff,344,auto,addtions
+akonadi,2017-04-28,598438ca0f53ed3953e1518b0269ed9dd363ae8d,128,2017-04-28,14f3d8389d38fa2883f0dda17a47c9844ecd7cab,344,auto,addtions
+1
+1
+1
+1
+Analyse case of - AKONADI - lambda addtions
+Analyse case of - AKONADI - auto addtions
+2
+Analyse case of - AKONADI-CALENDAR - ranged-for addtions
+akonadi-calendar: 21
+2
+Analyse case of - AKONADI-CALENDAR - ranged-for addtions
+akonadi-calendar: 10
+2
+Analyse case of - AKONADI-CONTACTS - auto addtions
+akonadi-contacts: 4
+akonadi-contacts,2020-10-26,438659496d0f387eca230fac32cbe82165dc0c1d,24,2020-11-02,d7bea9b44aece787d7faf42b419f6dffbd468ca1,167,auto,addtions
+2
+Analyse case of - AKONADICONSOLE - auto addtions
+akonadiconsole: 11
+akonadiconsole,2017-09-03,4c8ec9369c39db61c011ebe6b650acde02516a63,29,2017-09-04,3ea2f16b97f8e101c8558884ebfcf3b9e82afe8e,45,auto,addtions
+2
+Analyse case of - AKREGATOR - ranged-for addtions
+akregator: 12
+akregator,2019-06-04,48a74b965ab22d2c158d8b3df2398bdb87d14fb7,39,2019-06-04,909be24a43a07feffdcdd97bcbdf6c4de6adac71,63,ranged-for,addtions
+2
+Analyse case of - AKREGATOR - auto addtions
+akregator: 12
+akregator,2020-10-31,d1fee71dc719248d7dbd61681f05543bc3ad81f6,29,2020-11-02,7e6ff7d7b14c47db21b71518edbdec44367574bd,104,auto,addtions
+Analyse case of - AMAROK - auto addtions
+amarok: 25
+amarok,2018-02-21,24eb247789a29cc8f36d106491874e9b2a77a59a,59,2018-02-21,3a25034e5006d2692719dafca4969484970580ef,93,auto,addtions
+3
+Analyse case of - AMAROK - lambda addtions
+amarok: 76
+amarok,2020-03-14,d790424e56783d9493bf732c7cb3d7cd6646cc0f,30,2020-03-24,4337b3ef6e9ed30606fd06e15fd9ca350b1da01b,70,lambda,addtions
+amarok,2020-09-26,eec94c7cf15ff8501526b0211a4f3784a673c840,30,2020-09-26,ce93fb34c396f1b7766daaf43669d82f949ff091,70,lambda,addtions
+4
+4
+Analyse case of - AMAROK - lambda addtions
+amarok: 6
+4
+Analyse case of - BALOO-WIDGETS - auto addtions
+baloo-widgets: 11
+baloo-widgets,2022-06-01,2a41c2a789b68f7dd239863033ecc79e348ae70f,31,2022-06-01,93b3e120c96469a28b423ddf646e397d30e3a232,60,auto,addtions
+4
+Analyse case of - DISCOVER - ranged-for addtions
+discover: 4
+4
+Analyse case of - DISCOVER - auto addtions
+Analyse case of - DISCOVER - auto addtions
+5
+Analyse case of - DISCOVER - lambda addtions
+Analyse case of - DISCOVER - auto addtions
+6
+Analyse case of - DISCOVER - ranged-for addtions
+discover: 13
+discover,2021-05-19,770799a556310e3fa022432bce371e070cc901db,80,2021-05-20,13891987fbeba55d2ecc6f6ec4cf948f7c34d460,166,ranged-for,addtions
+discover,2021-05-21,c0666891d4bf73b60f85567358645b5e72bff559,80,2021-05-22,286c309ecae2cd0f944d2e73bc9d93f4dab70989,166,ranged-for,addtions
+6
+6
+6
+Analyse case of - DOLPHIN - ranged-for addtions
+dolphin: 46
+dolphin,2020-10-23,360a8dd883f7e281c0a3f2ae729450790399bf3d,53,2020-10-23,a24327cd50ef17b953ecb908d260b73460158107,161,ranged-for,addtions
+6
+Analyse case of - GRANATIER - ranged-for addtions
+granatier: 3
+granatier,2018-05-15,86285638106104c81008ee82174263cb663e0ce6,28,2018-05-15,8a03ba70008f7f2c73cdd3f3d03b9ed7e922a37e,52,ranged-for,addtions
+Analyse case of - GRANATIER - auto addtions
+granatier: 2
+7
+Analyse case of - GWENVIEW - lambda addtions
+gwenview: 90
+gwenview,2021-05-11,79f1c25e6b7dd5398892049ca4005c1458d4b5de,44,2021-05-18,31bc51d9f870dd8236223f55f0059f4a9fd1e555,261,auto,addtions
+gwenview,2021-05-22,e8082e36c17096dafc7f4bfec36253434757885f,32,2021-05-24,c3b9e549105cd78df8c9f8881b543c81977fede6,49,lambda,addtions
+gwenview,2021-05-22,e8082e36c17096dafc7f4bfec36253434757885f,44,2021-05-24,c3b9e549105cd78df8c9f8881b543c81977fede6,264,auto,addtions
+gwenview,2021-06-05,034d673f9b5340bb1a543fdc1a18be8cb66b9272,51,2021-06-07,537269eb5dd75cddb79defbe9864e19d3d6478b2,261,auto,addtions
+gwenview,2021-06-10,5b4ef6256a3060e071aa64070a68cdfda7eba98c,51,2021-06-10,d82258c4318188993a428f51e4a205083a121602,260,auto,addtions
+gwenview,2021-06-27,fb87efe493b04bfc2e93ba6e8efe4bf30a6fbfea,33,2021-06-30,222ed1fa0c40fb036b19bd5ecdd09a0faeb6c016,50,lambda,addtions
+8
+8
+8
+8
+8
+8
+Analyse case of - GWENVIEW - auto addtions
+Analyse case of - GWENVIEW - auto addtions
+9
+Analyse case of - GWENVIEW - lambda addtions
+9
+Analyse case of - JUK - ranged-for addtions
+juk: 19
+9
+Analyse case of - KADDRESSBOOK - auto addtions
+kaddressbook: 2
+Analyse case of - KALARM - ranged-for addtions
+kalarm: 84
+kalarm,2019-08-09,19458aa7cfe80d301a3d8cfc7ca08f7ba7ee8b4a,30,2019-08-11,61590fae7ba5fd8bea501c68f2f754af3f74776f,77,ranged-for,addtions
+kalarm,2019-10-16,02ccc337a24d02ca6ca427d8239a75274893febd,31,2019-10-16,5576c9a22faaf91fa9ed811d8c6e572fc74af5bf,75,ranged-for,addtions
+10
+10
+10
+Analyse case of - KALZIUM - ranged-for addtions
+kalzium: 18
+10
+Analyse case of - KATE - auto addtions
+kate: 38
+Analyse case of - KATE - ranged-for addtions
+kate: 42
+Analyse case of - KBIBTEX - lambda addtions
+kbibtex: 15
+kbibtex,2019-06-25,ccd00a24bb30a8518f2cb74e3cf9839b6416af5e,24,2019-07-01,3be80b570a188e3cdbd8f8b3045dab287b15b473,64,lambda,addtions
+kbibtex,2019-07-19,ff15950deb582d4986da21c74fb99bcb1999da6e,24,2019-07-20,40a2aee94fdc14b66b6806d552b599de3b4e64c1,64,lambda,addtions
+13
+13
+Analyse case of - KBIBTEX - lambda addtions
+kbibtex: 1
+13
+Analyse case of - KDEPIM-RUNTIME - ranged-for addtions
+kdepim-runtime: 4
+kdepim-runtime,2016-12-28,3ffe39277fc514d35ff3b476e94ba7af29d0ac51,43,2016-12-28,d10456bd725e2e724c778a58a779d850f1b69420,81,ranged-for,addtions
+13
+Analyse case of - KDEPIM-RUNTIME - ranged-for addtions
+kdepim-runtime: 24
+13
+Analyse case of - KDEPIM-RUNTIME - auto addtions
+kdepim-runtime: 18
+kdepim-runtime,2017-06-20,39fe7ad7eb5cf78982f3cc339620a9e9cca200fb,40,2017-06-20,1fdb1dace487a9bf3b77550a3fcc60c44693d005,95,auto,addtions
+kdepim-runtime,2017-06-21,cdb42aa48cfe9baa7d1aa5e591b27e0553d5dada,40,2017-06-21,95075609a8f1a7c928a756560ce53d027eed2ed0,95,auto,addtions
+14
+14
+Analyse case of - KDEPIM-RUNTIME - auto addtions
+14
+Analyse case of - KDEPIM-RUNTIME - auto addtions
+kdepim-runtime: 7
+14
+Analyse case of - KDEPIM-RUNTIME - auto addtions
+14
+Analyse case of - KDEPLASMA-ADDONS - auto addtions
+14
+Analyse case of - KDEPLASMA-ADDONS - auto addtions
+kdeplasma-addons: 45
+14
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 14
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 15
+kdesvn,2019-07-30,9b3e6b8e68f56ba7d2e66dd37307895565e11de8,43,2019-08-09,30830d51ca01b9cc8492367c7e0c5bb2255e5543,87,ranged-for,addtions
+15
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 8
+15
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 28
+15
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 1
+15
+Analyse case of - KDESVN - ranged-for addtions
+kdesvn: 3
+15
+Analyse case of - KDEVELOP - auto addtions
+Analyse case of - KDEVELOP - auto addtions
+16
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 44
+16
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 15
+16
+Analyse case of - KDEVELOP - ranged-for addtions
+Analyse case of - KDEVELOP - auto addtions
+17
+Analyse case of - KDEVELOP - ranged-for addtions
+17
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 21
+17
+Analyse case of - KDEVELOP - ranged-for addtions
+17
+Analyse case of - KDEVELOP - auto addtions
+17
+Analyse case of - KDEVELOP - lambda addtions
+Analyse case of - KDEVELOP - lambda addtions
+kdevelop: 26
+18
+Analyse case of - KDEVELOP - lambda addtions
+kdevelop: 76
+kdevelop,2015-10-29,fbf4cd63aed7bc20e0c0cddccacce04e161cb3f7,97,2015-10-29,77b140790d8a1d1d53de087ae2295b598e0ed414,334,auto,addtions
+kdevelop,2015-10-29,fbf4cd63aed7bc20e0c0cddccacce04e161cb3f7,28,2015-10-29,77b140790d8a1d1d53de087ae2295b598e0ed414,64,ranged-for,addtions
+kdevelop,2015-11-04,161aab5140795cc4aa1248101990021b4230c6c2,97,2015-11-04,b1a7f6d01b45cf742e5487d805c5b6eda1af2c0e,334,auto,addtions
+kdevelop,2015-11-04,161aab5140795cc4aa1248101990021b4230c6c2,28,2015-11-04,b1a7f6d01b45cf742e5487d805c5b6eda1af2c0e,64,ranged-for,addtions
+kdevelop,2015-11-27,dad5b1d5ac0e96ec218597d5d6a120b6410ece7f,97,2015-11-27,29f2bbc1dfa14cc6fa120a14ea7d33e4396fbc14,348,auto,addtions
+kdevelop,2015-11-27,dad5b1d5ac0e96ec218597d5d6a120b6410ece7f,28,2015-11-27,29f2bbc1dfa14cc6fa120a14ea7d33e4396fbc14,66,ranged-for,addtions
+kdevelop,2015-11-29,5e1af74f5038b6e39bd959781e76df05d4e19479,98,2015-11-29,482215c19bf3a536d967184f08abf9d9a65ff5da,353,auto,addtions
+kdevelop,2015-11-29,5e1af74f5038b6e39bd959781e76df05d4e19479,28,2015-11-29,482215c19bf3a536d967184f08abf9d9a65ff5da,66,ranged-for,addtions
+kdevelop,2015-12-01,1f2b9279f3347eaeca058c8818d7b1573db41a4d,98,2015-12-01,0e93828aa22ea074690ed44201d4140157985dca,354,auto,addtions
+kdevelop,2015-12-01,1f2b9279f3347eaeca058c8818d7b1573db41a4d,28,2015-12-01,0e93828aa22ea074690ed44201d4140157985dca,66,ranged-for,addtions
+18
+18
+18
+18
+18
+18
+18
+18
+18
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 75
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - lambda addtions
+18
+Analyse case of - KDEVELOP - lambda addtions
+kdevelop: 78
+kdevelop,2015-12-19,7db4150e5425e39c45e3bbe6a69c82971c31591f,100,2016-01-12,1d9ad33af2910b5af535f28a225ab3ab8137cfbf,361,auto,addtions
+kdevelop,2015-12-19,7db4150e5425e39c45e3bbe6a69c82971c31591f,28,2016-01-12,1d9ad33af2910b5af535f28a225ab3ab8137cfbf,56,ranged-for,addtions
+kdevelop,2016-04-01,f3348ac0635021b56f1aaa4d9e2c8165c03e53d7,99,2016-04-01,c8ef3eeea53ad9a50ffe3940762171e1a2f9249f,426,auto,addtions
+kdevelop,2016-04-08,708228e1333df501627b39f02067e11139c3c9b0,99,2016-04-08,93abae00efebb0a157753bf36be9e943b5d949e8,433,auto,addtions
+kdevelop,2016-04-12,46b2faeddfbd4c3e315c7e65ea76bc18ace8c3fa,100,2016-04-12,931d4da66bd5aa05c3f4476b2a33d5e60baf50ff,432,auto,addtions
+18
+18
+18
+18
+18
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 49
+18
+Analyse case of - KDEVELOP - lambda addtions
+kdevelop: 55
+18
+Analyse case of - KDEVELOP - lambda addtions
+kdevelop: 39
+kdevelop,2016-06-21,d7e6e583ff5203fecf3e160b2998bde1a4bf68ae,100,2016-07-12,11ea818228cb23bc9ab8360eea4f45b726a234f2,462,auto,addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 92
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 49
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 23
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 67
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 42
+kdevelop,2018-12-12,05efd841d4f55e4370a364f5c7b55626af580b44,2039,2018-12-13,cd4e03c266e62ff16f67eb971c034a780ffa4798,3080,auto,addtions
+kdevelop,2018-12-28,57ec89f99a49be439b5f48cde4d1e9463cc8ec5b,2039,2018-12-28,a782dfc1cdf3a04c5164ca1df6f8b6a91f6fc51b,3080,auto,addtions
+kdevelop,2019-01-04,263a57379ef68f7d0471009f1163821ecf5556e4,2039,2019-01-04,a54c46524b8ea38f55041e164e0ece63a0836904,3091,auto,addtions
+kdevelop,2019-01-06,97a1bbfb142de12d6a0015c2b2d0edaa9429cdff,2039,2019-01-06,b51458d642dbe4b85b3a9fb3fb38c88bc0a06ca9,3080,auto,addtions
+kdevelop,2019-01-06,a3167ce6362b2d87e143f47458868f69355daf42,2039,2019-01-07,df42045302d566ea0a328c5496229a3543be9d86,3080,auto,addtions
+kdevelop,2019-01-09,1dbebbab5f34d4b9b1ca37d5f4c1e2cd41616fd2,2039,2019-01-09,7055e9d58af2166a350259978cf8194d1fa97a03,3108,auto,addtions
+18
+18
+18
+18
+18
+18
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 40
+kdevelop,2019-01-20,f7571e8b0589306e9bd9d872f9cff4f5f8c49298,2038,2019-01-21,37cc98f374fd86fdcc228a30b0d897eaeab39784,3136,auto,addtions
+kdevelop,2019-01-24,eebfa0b45e612f27637bcda3880ed169af2dd278,2038,2019-01-24,7fd559bba4b6d401667a1b3f75d5e3e205986480,3132,auto,addtions
+kdevelop,2019-01-26,62f68fddf7a6940fd0185d10644bb1eb02477bac,2038,2019-01-26,c8f711693ff5cde5056de5f062e9894ed0d721f9,3132,auto,addtions
+kdevelop,2019-01-27,a7c053a39218db49c50d989d3d7bd48ab12276a6,2041,2019-01-27,a6426189fe64990b7687cff3a467a1f86b45eaac,3132,auto,addtions
+18
+18
+18
+18
+18
+Analyse case of - KDEVELOP - auto addtions
+kdevelop: 87
+kdevelop,2019-01-10,e8b3ee4a2541ba3d59545107896cc3830e030e7b,2043,2019-01-21,fbb955c772ec619310ada6a5420a2b7c44b71ecd,3140,auto,addtions
+kdevelop,2019-03-20,a19629cc01fac4df1297b7b19c070e22d7ce61e0,2042,2019-03-20,d5e3e27bb2720d84adda95de07a728a9e61c866f,3191,auto,addtions
+kdevelop,2019-03-31,44fcd808e6bf87d5882b756d1118f960147084ae,2042,2019-04-01,0d8a820b5eaae5cbacfe6da5ff4df9a5540c25d3,3192,auto,addtions
+kdevelop,2019-04-06,b4cf84ef741438bb88e35bc940a8c0458123dec5,2043,2019-04-09,5e17ba4cd7a50816825a279c70a6b1c64a701926,3192,auto,addtions
+kdevelop,2019-04-10,566b98a9965e55b1884708a2bb194f2bedb79925,2043,2019-04-12,bbb42a2f1f6e750a4b02398016d0bf18e1251cf2,3193,auto,addtions
+kdevelop,2019-04-30,e9c489eba1743159b2852793980f487e75e890bd,2043,2019-04-30,84bd62b6255530ee4f9fd8d65e545388b31dd598,3196,auto,addtions
+18
+18
+18
+18
+18
+18
+18
+Analyse case of - KDEVELOP - auto addtions
+18
+Analyse case of - KDEVELOP - ranged-for addtions
+18
+Analyse case of - KID3 - auto addtions
+kid3: 26
+kid3,2018-09-29,0aeb3a4a02859c461432203da3163500bf3f8c30,55,2018-09-29,f519ce07581980b95599227307eb46c8bc7f9abe,363,auto,addtions
+Analyse case of - KIMAP - ranged-for addtions
+kimap: 5
+kimap,2021-01-14,24dffb04a5527d670d69a5d59b438646a07b837d,24,2021-01-20,c5278fe4c77329b64cef6eb097665d4b1e2e16a3,44,ranged-for,addtions
+19
+Analyse case of - KIO - ranged-for addtions
+kio: 11
+kio,2019-04-13,f3b0f220a78d4e5a5b94b46e931779d755ac19ce,31,2019-04-14,414c3a9c8a46ce4e8ae40e384d6cf99ea46ac19d,149,ranged-for,addtions
+Analyse case of - KIO - ranged-for addtions
+kio: 86
+kio,2018-12-22,1df333b33cc1ca3dabfceed27ea21e65f26e0f72,155,2019-08-28,c86eedf0f92df8353bb5ff2dcfc5a02c282a6db0,354,ranged-for,addtions
+kio,2019-09-19,635f67420a1a688674590c0686becbfca42aa487,207,2019-09-21,103e13c2765e7fb587fd778c1d04c90d3af42aff,360,ranged-for,addtions
+20
+20
+20
+Analyse case of - KIO - ranged-for addtions
+20
+Analyse case of - KIO-EXTRAS - auto addtions
+Analyse case of - KIO-EXTRAS - ranged-for addtions
+Analyse case of - KLEOPATRA - auto addtions
+repository not found: /home/walterlucas/Documents/cpp-evolution-paper/projects/kleopatra
+Analyse case of - KLEOPATRA - auto addtions
+repository not found: /home/walterlucas/Documents/cpp-evolution-paper/projects/kleopatra
+Analyse case of - KMAIL - auto addtions
+Analyse case of - KMAIL - lambda addtions
+kmail: 33
+kmail,2018-09-03,f47372f234f673293fc3c9d0fbd89ade7d723451,26,2018-09-03,4207d62f5a0259803b7b86239673cc54280d5777,58,lambda,addtions
+kmail,2018-09-03,f47372f234f673293fc3c9d0fbd89ade7d723451,77,2018-09-03,4207d62f5a0259803b7b86239673cc54280d5777,201,auto,addtions
+kmail,2018-09-10,5ab658aef00b8cbc9d918fbc19914c03d4edf2b7,26,2018-09-10,52eee4a475ad2e27c732d988701f1ef6dd128754,58,lambda,addtions
+kmail,2018-09-10,5ab658aef00b8cbc9d918fbc19914c03d4edf2b7,77,2018-09-10,52eee4a475ad2e27c732d988701f1ef6dd128754,218,auto,addtions
+24
+24
+24
+24
+Analyse case of - KMAIL - auto addtions
+24
+Analyse case of - KMAIL - auto addtions
+kmail: 16
+kmail,2020-10-25,00b8e5ee168105ea9fca66dd1954283c260b1d82,245,2020-11-01,3055a93326cc6b90cba8c50d72b8ab0d1d33c2ac,614,auto,addtions
+kmail,2020-11-03,145382b569ba124f90022cca1279964e2ae1c643,245,2020-11-03,93550163a72a230cd9e709bebb4b930e8b2b330e,614,auto,addtions
+24
+24
+24
+Analyse case of - KMIME - auto addtions
+kmime: 2
+24
+Analyse case of - KMYMONEY - ranged-for addtions
+kmymoney: 63
+kmymoney,2018-02-25,bf29a1360e4096fd335edfe901975526712b4579,37,2018-02-26,939bc9b1d59a5e44d4c00699b2e00af3379383c6,73,ranged-for,addtions
+kmymoney,2018-02-27,a8aad6a22d6222ee143cc477370ca0e300d915f6,37,2018-02-27,6676cec5d1ad492141db933b70098e548fa8d0ed,73,ranged-for,addtions
+kmymoney,2018-03-02,6080576565a601f7f5e93c4bef8fcc78defda6ef,38,2018-03-02,f068f8a686c656f7f9e4410089a77e050d5bf06c,73,ranged-for,addtions
+kmymoney,2018-03-03,887c69c41503a5083c0b8c545160a3173ca94c5d,38,2018-03-03,6375a730aea16afdc377424f3619562251846bb4,73,ranged-for,addtions
+kmymoney,2018-03-03,b93a5d0d353a68635fbe57997d6f7ed4d5b33b05,38,2018-03-03,945738582ade35aa2b68be61dd133ff5661029bb,73,ranged-for,addtions
+24
+24
+24
+24
+24
+Analyse case of - KMYMONEY - ranged-for addtions
+kmymoney: 41
+24
+Analyse case of - KMYMONEY - ranged-for addtions
+24
+Analyse case of - KMYMONEY - lambda addtions
+kmymoney: 41
+kmymoney,2020-03-02,b3c5e05d395de9da1a41e4daf4b391d6349d5e85,118,2020-03-16,a249d600807b33f38f5194c061674a5ddcdea4a7,180,ranged-for,addtions
+kmymoney,2020-03-16,41e4b4d9764fc5c86ee9fb8b112631e69ff08160,118,2020-03-17,a683047dd30659e8d8bddfdc1040522d8c99617a,180,ranged-for,addtions
+kmymoney,2020-03-17,b768399e54775cc1557ebaf191ce76e66cc29b42,118,2020-03-17,629db652400a9c410eabeb97e91526993fd5ce36,180,ranged-for,addtions
+kmymoney,2020-03-17,6ce59a0000a5ae48cc59c3ba7e1b59bd603302e3,118,2020-03-21,598ddc3e476715dc46d6f15ca479eab554ca7f01,180,ranged-for,addtions
+kmymoney,2020-03-21,c0e60a0e4ab3098e15d2de8f5649602e3646f43a,118,2020-04-11,19330ab5be4ddc1686b5f71fe12409baf7a21a65,180,ranged-for,addtions
+kmymoney,2020-04-11,a39da472977f3ef2da0f413aca045e875a0a9647,118,2020-04-14,7be972afb888b2535c0ee9e05b10dfce348ee86e,180,ranged-for,addtions
+kmymoney,2020-04-14,ae57e22fa3211b0eb894e88f92a0a394de95fbe3,118,2020-08-18,7275791f28e28e467652b7621a7f0228e47a5dda,180,ranged-for,addtions
+kmymoney,2020-12-28,142103d51fa8e3b9a4bf9c9149d98d3e383650bf,67,2020-12-31,1c7cf75c4dcd1699582ca67ee2baa72fe81a23c8,111,lambda,addtions
+kmymoney,2021-01-02,948a67a2033c17ed8f6dd54eeda9b7596bbc6324,118,2021-01-02,926782926e645402e7ef5f0eeb54804113ae42ae,180,ranged-for,addtions
+kmymoney,2021-01-02,b0f666add11e6a059780a89c72a84a7902f95f15,118,2021-01-02,f8c30be03cfa55927ba14929e0527f1ca9dd31fc,180,ranged-for,addtions
+24
+24
+24
+24
+24
+24
+24
+24
+24
+24
+Analyse case of - KNOTES - auto addtions
+knotes: 2
+knotes,2021-04-28,a1fd59cf1de2b9e71b83b1c16cf2e848f9b897e0,103,2021-05-02,4d1e8e4d60e95b63286ac0103fed2e0310a3cd92,178,auto,addtions
+Analyse case of - KONQUEROR - lambda addtions
+konqueror: 7
+25
+Analyse case of - KONSOLE - ranged-for addtions
+konsole: 6
+konsole,2019-11-17,0b36d0aa82a9839ce7cc19d7dbd2fe9202725972,61,2019-11-23,c83bb19a68a65a59e149586d809c442168ba35aa,98,ranged-for,addtions
+Analyse case of - KONSOLE - ranged-for addtions
+konsole: 59
+konsole,2019-11-16,7bcf92696bad07940a97b17f749a01d6772dd4e5,61,2019-11-22,9bc892eff0dd3a19346182650b8b6d5ef0436aee,99,ranged-for,addtions
+konsole,2020-03-01,29f9c927c4116265d67a8ddce793d37a32128131,61,2020-03-08,26f4a2218f52f790d4de087216098619a753164e,149,ranged-for,addtions
+26
+26
+26
+Analyse case of - KONVERSATION - auto addtions
+konversation: 81
+konversation,2020-10-16,5f7ce13cee6351bb0dabe4fb2a4883bd81552335,30,2020-10-16,53f25b87d31dccb5af7be3534e4ddc700db9a0cc,48,auto,addtions
+konversation,2020-10-16,5f7ce13cee6351bb0dabe4fb2a4883bd81552335,161,2020-10-16,53f25b87d31dccb5af7be3534e4ddc700db9a0cc,271,ranged-for,addtions
+konversation,2020-10-16,4152be1dc119763d6f7666a66e1c333b8a7510ae,163,2020-10-16,95e938b81115db329420612a12916e7282273508,271,ranged-for,addtions
+konversation,2020-10-18,dfb43d853cf57772d736a3ebb9ffea3b96604dfc,163,2020-10-18,ba0cf478d9b544957e6d4f0ced6e254e74ad2e7a,271,ranged-for,addtions
+konversation,2020-10-19,291a1a3713fbd068f4d3e503d2cb848f181271d9,163,2020-10-19,73cbf537cd267927fe333b871135a0ce8e18ef5e,271,ranged-for,addtions
+27
+27
+27
+27
+27
+Analyse case of - KONVERSATION - ranged-for addtions
+Analyse case of - KONVERSATION - auto addtions
+konversation: 34
+konversation,2021-05-16,4808d1dc8cd8ef6f0011c30fc1cdd56d234f845c,78,2021-05-24,4be5cb0086f95bc3e97475a1ef6c2a879d258813,238,auto,addtions
+konversation,2021-06-15,2670aa999acae527bd05aa9f82d0a90dee858dd8,78,2021-06-15,7c6ed0b7658a5c2ea66d6032c569012258847b91,238,auto,addtions
+konversation: 6
+28
+28
+Analyse case of - KONVERSATION - auto addtions
+konversation: 14
+28
+Analyse case of - KORGANIZER - ranged-for addtions
+korganizer: 60
+Analyse case of - KORGANIZER - auto addtions
+korganizer: 8
+Analyse case of - KPHOTOALBUM - auto addtions
+kphotoalbum: 9
+kphotoalbum,2020-04-10,630a33922e35f761490c4fcfc5ccacc62314c164,109,2020-04-10,233c3d7fc43217f6acf2a4e2db915bf5747cb50c,263,ranged-for,addtions
+30
+Analyse case of - KPHOTOALBUM - ranged-for addtions
+30
+Analyse case of - KPIMTEXTEDIT - auto addtions
+kpimtextedit: 2
+kpimtextedit,2020-10-22,514469e2b1f42c475573f0d9f137a7329121a24b,109,2020-11-01,c6fa90c5c0bf719439fd9e2d2678eb0e329ff624,189,auto,addtions
+Analyse case of - KRFB - auto addtions
+krfb: 8
+krfb,2020-10-23,4993e65d5962ebf2f3d58afdeca8a7e72d5b9aa3,23,2020-10-23,a109e3d6c9cf5e312567ec5d5d98534457ec14b9,35,auto,addtions
+Analyse case of - KRUSADER - auto addtions
+krusader: 25
+krusader,2018-10-04,be841a428856553664b342eea9a58b98063a9b74,31,2018-10-05,59ad209a23d28ea6e745a097bf06e889b8dfb88b,359,auto,addtions
+krusader,2018-10-05,531f0b4fe9750e006dc2401ad4ac4dd833a17a01,50,2018-10-05,15ca9d93c97b0729e29c74f38e6cdeb31793d09c,98,ranged-for,addtions
+krusader,2019-02-11,fc0839143f214b8244df22b2912dfde7b6422c76,31,2019-02-14,ad4a6e23811f8a825c86245a7f9e4c1fbdf9fc88,375,auto,addtions
+krusader,2019-02-11,fc0839143f214b8244df22b2912dfde7b6422c76,50,2019-02-14,ad4a6e23811f8a825c86245a7f9e4c1fbdf9fc88,98,ranged-for,addtions
+krusader,2019-02-15,a08aa739eef5d167947249afe9a8e69b60fa72a6,31,2019-02-17,a2bae85c9e4ff7654c933be2dc79d42fd12ee1ec,375,auto,addtions
+krusader,2019-02-15,a08aa739eef5d167947249afe9a8e69b60fa72a6,50,2019-02-17,a2bae85c9e4ff7654c933be2dc79d42fd12ee1ec,98,ranged-for,addtions
+33
+33
+33
+33
+33
+33
+Analyse case of - KRUSADER - ranged-for addtions
+Analyse case of - KRUSADER - auto addtions
+krusader: 68
+krusader,2019-02-09,6f651d84eafa50ab5516603a8957def70bcb0b11,31,2019-02-15,b4a305135b4cbe851c90ecb7f471b7b46a6f7d57,375,auto,addtions
+krusader,2019-02-09,6f651d84eafa50ab5516603a8957def70bcb0b11,50,2019-02-15,b4a305135b4cbe851c90ecb7f471b7b46a6f7d57,99,ranged-for,addtions
+34
+34
+34
+Analyse case of - KRUSADER - ranged-for addtions
+34
+Analyse case of - KRUSADER - auto addtions
+krusader: 8
+34
+Analyse case of - KRUSADER - ranged-for addtions
+34
+Analyse case of - KRUSADER - auto addtions
+krusader: 9
+34
+Analyse case of - KRUSADER - ranged-for addtions
+34
+Analyse case of - KRUSADER - auto addtions
+krusader: 19
+34
+Analyse case of - KRUSADER - ranged-for addtions
+34
+Analyse case of - KSTARS - auto addtions
+kstars: 10
+Analyse case of - KTORRENT - ranged-for addtions
+ktorrent: 12
+ktorrent,2017-07-06,be8a76c88fcd1a936337950d78b0deb30be96050,74,2017-07-06,2ad882b61101dfe8414e8f47f89360f4e2d96754,113,ranged-for,addtions
+Analyse case of - KTORRENT - ranged-for addtions
+ktorrent: 4
+36
+Analyse case of - KWIDGETSADDONS - lambda addtions
+kwidgetsaddons: 7
+kwidgetsaddons,2020-12-09,37456c7fa703a95e7a96b07f739359a434dbe972,56,2021-04-26,034e0b7b1d5af08136e38a9eb7df4ee514fe385b,97,lambda,addtions
+kwidgetsaddons,2021-05-06,01ccec208bf267433c8ad5006b4df956f647e8e9,56,2021-05-08,5c76897633adf69ad472cce771d8f29797090a43,97,lambda,addtions
+37
+37
+Analyse case of - KWIN - auto addtions
+Analyse case of - KWIN - lambda addtions
+kwin: 74
+Analyse case of - KWIN - lambda addtions
+39
+Analyse case of - MUON - ranged-for addtions
+muon: 4
+39
+Analyse case of - KRITA - ranged-for addtions
+krita: 64
+Analyse case of - KRITA - ranged-for addtions
+40
+Analyse case of - KRITA - ranged-for addtions
+40
+Analyse case of - ZANSHIN - auto addtions
+zanshin: 81
+Analyse case of - ZANSHIN - lambda addtions
+zanshin: 26
+41
+Analyse case of - LABPLOT - auto addtions
+labplot: 44
+Analyse case of - LABPLOT - ranged-for addtions
+labplot: 18
+labplot,2017-12-03,3e1256377feb37b8a79800cb3c0e0d9345d79e81,353,2017-12-03,5c28a3e5f994fbc586519fad3ec2aadff7357070,699,ranged-for,addtions
+Analyse case of - LABPLOT - auto addtions
+labplot: 26
+43
+Analyse case of - LABPLOT - auto addtions
+labplot: 13
+43
+Analyse case of - MARBLE - ranged-for addtions
+marble: 25
+marble,2017-01-26,7a90178c973e4af02b515578a2c02b71efb8dc47,90,2017-01-27,33eff9bc4ea9581dc3d84783f62747463f2c047e,609,ranged-for,addtions
+43
+Analyse case of - CALLIGRA - ranged-for addtions
+calligra: 4
+43
+Analyse case of - CALLIGRA - ranged-for addtions
+calligra: 11
+43
+Analyse case of - CALLIGRA - ranged-for addtions
+43
+Analyse case of - CALLIGRA - lambda addtions
+calligra: 11
+Analyse case of - CALLIGRA - lambda addtions
+calligra: 26
+calligra,2021-03-15,e3241d934c7bfc5d44a2c2955a5e30b216490182,30,2021-03-17,15591af51ef307db9d3ce3050a94a1c7901ee304,92,lambda,addtions
+calligra,2021-03-22,8972fcd111ce5772280b06ad241c85c9115a8fef,30,2021-03-22,b00d77395e317eaf0e9dfb55c937d08e1cb99fc9,92,lambda,addtions
+calligra: 4
+44
+44
+Analyse case of - CALLIGRA - ranged-for addtions
+calligra: 36
+44
+Analyse case of - CALLIGRA - ranged-for addtions
+calligra: 6
+44
+Analyse case of - KCONTACTS - auto addtions
+kcontacts: 11
+44
+Analyse case of - KCONTACTS - auto addtions
+kcontacts: 11
+kcontacts,2021-09-11,7ff774b3f46219ecffe0aaa9ca9a68557ae68914,58,2021-09-25,3971b6278f62a9568792f7f41bd2e4ff46daf021,103,auto,addtions
+kcontacts,2021-09-11,7ff774b3f46219ecffe0aaa9ca9a68557ae68914,39,2021-09-25,3971b6278f62a9568792f7f41bd2e4ff46daf021,71,ranged-for,addtions
+44
+44
+44
+Analyse case of - KCONTACTS - ranged-for addtions
+44
+Analyse case of - KCONTACTS - auto addtions
+kcontacts: 3
+44
+Analyse case of - KCONTACTS - ranged-for addtions
+44
+Analyse case of - TROJITA - auto addtions
+Analyse case of - TROJITA - auto addtions
+trojita: 38
+45
+Analyse case of - OKULAR - auto addtions
+okular: 11
+okular,2019-01-05,802e8814aad42a5fa4d665fc2d6eadb845b2589a,26,2019-01-05,a234a902dcfff249d8f1d41dfbc257496c81d84e,55,auto,addtions
+Analyse case of - OKULAR - auto addtions
+okular: 53
+okular,2018-12-29,a4735e428a33245341ff9d1db2281b4dcfc5b225,26,2019-01-11,614f580b79bed1cc19bb84960d8834a3d381fd18,55,auto,addtions
+46
+Analyse case of - OKULAR - ranged-for addtions
+okular: 7
+okular,2019-03-26,4094745e7ea6ab35edf4a5d5faa52b8f8a537747,31,2019-03-26,f34ebf659f6cd93233cca345d873bd54c039b83a,52,ranged-for,addtions
+Analyse case of - OKULAR - ranged-for addtions
+okular: 13
+47
+Analyse case of - OKULAR - ranged-for addtions
+okular: 35
+47
+Analyse case of - OKULAR - auto addtions
+47
+Analyse case of - OKULAR - ranged-for addtions
+47
+Analyse case of - OKULAR - ranged-for addtions
+47
+Analyse case of - OKULAR - lambda addtions
+okular: 13
+Analyse case of - OKULAR - ranged-for addtions
+48
+Analyse case of - OKULAR - lambda addtions
+okular: 10
+48
+Analyse case of - OKULAR - ranged-for addtions
+48
+Analyse case of - OKULAR - lambda addtions
+okular: 1
+48
+Analyse case of - OKULAR - ranged-for addtions
+48
+Analyse case of - PLASMA-DESKTOP - auto addtions
+plasma-desktop: 19
+48
+Analyse case of - PLASMA-DESKTOP - auto addtions
+plasma-desktop: 5
+48
+Analyse case of - PLASMA-DESKTOP - auto addtions
+plasma-desktop: 3
+48
+Analyse case of - PLASMA-DESKTOP - ranged-for addtions
+Analyse case of - OKTETA - lambda addtions
+okteta: 31
+49
+Analyse case of - OKTETA - auto addtions
+okteta: 39
+okteta,2019-02-22,d61ecf3261a1a42f78b7fa428dc633e6df4bc0f8,57,2019-02-22,c4c70a1e758b3fb319c0e41d3dd6ce787bf6194a,338,auto,addtions
+Analyse case of - RKWARD - auto addtions
+rkward: 26
+rkward,2022-03-06,d50cd2403b7720359f372ee1c2379a1e5e00564d,34,2022-03-09,8f902226d93b802833b81e16bb9e948943e6d61e,59,auto,addtions
+50
+Analyse case of - KDENLIVE - ranged-for addtions
+Analyse case of - KDENLIVE - auto addtions
+kdenlive: 77
+kdenlive,2017-04-14,9ecd76eb79876742fb3007f3a077e614888fa521,115,2017-04-14,387199e1a602cd1101916ed2a96b0e8b3e8e86c5,352,auto,addtions
+kdenlive,2017-04-16,414d6579a16d2ce8d2ea7a2574fc33c0e90f837c,26,2017-04-16,bdc7ab9c6913b90e901f326f3199e467adbe64e1,349,auto,addtions
+kdenlive,2017-04-16,414d6579a16d2ce8d2ea7a2574fc33c0e90f837c,67,2017-04-16,bdc7ab9c6913b90e901f326f3199e467adbe64e1,104,ranged-for,addtions
+kdenlive,2017-04-17,209e4fccb5b63f1692694fc711eeda43edf9d435,26,2017-04-17,a6f72f0865c238902e51a6588dda8430fc8a3321,345,auto,addtions
+51
+51
+51
+51
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+kdenlive: 42
+kdenlive,2017-04-18,fe684e7eb326ccdadb2dada3e8a348788b463948,26,2017-04-18,2e004012c3d8a98988065a1c120a3fc0ed44c5b2,354,auto,addtions
+kdenlive,2017-04-20,20663fcc57aa0c2dbbb1fc2b802f23fa2d867132,111,2017-04-20,2e508acc340ff1d6ddda55e538c9fe01f09975f6,312,ranged-for,addtions
+51
+51
+51
+Analyse case of - KDENLIVE - auto addtions
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+kdenlive: 28
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+kdenlive: 90
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+kdenlive: 33
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - KDENLIVE - auto addtions
+51
+Analyse case of - KDENLIVE - ranged-for addtions
+51
+Analyse case of - PARTITIONMANAGER - ranged-for addtions
+partitionmanager: 13
+partitionmanager,2016-08-26,78c4b09467ff388ea1d2a0d08a1ac859383040b8,22,2016-08-31,e7ac5e5fa2800c9583ec1223abd1fce2a6e51a50,38,ranged-for,addtions
+51
+Analyse case of - PLASMA-FRAMEWORK - lambda addtions
+plasma-framework: 14
+plasma-framework,2015-04-21,c22bb8c4a8ede624431b07b6ed61dde537d6f5c0,21,2015-04-24,04f96779c119d67aa636a7435176775aff5ccf0f,35,lambda,addtions
+plasma-framework,2015-05-07,02f124b12052fc6a49002c895651ee61dfc2ac1e,21,2015-05-07,ea924b14691da3819ca17d876f63ffc686fcf840,35,lambda,addtions
+52
+Analyse case of - PLASMA-FRAMEWORK - lambda addtions
+plasma-framework: 4
+52
+Analyse case of - PLASMA-FRAMEWORK - auto addtions
+plasma-framework: 8
+plasma-framework,2020-04-13,359ac6bcc022a8402042c5fe386b6762a269a144,71,2020-04-13,52c0a136f9fff59db30210a788e9f904ea594fa4,118,auto,addtions
+52
+Analyse case of - SYSTEMSETTINGS - auto addtions
+systemsettings: 14
+systemsettings,2021-10-03,ba3dedd418de2df3122f0b1e79ff7eb72e3fc003,21,2021-10-06,cb275429ec31d162582a702a96a7456fe6165525,41,auto,addtions
+systemsettings,2021-10-07,4495aa3c4d03fcd6bf9499464af3f565a2c1eef4,21,2021-10-07,ab35c0f635fa2d33c00387fa29f101a4af6e33e7,41,auto,addtions
+52
+52
+52
