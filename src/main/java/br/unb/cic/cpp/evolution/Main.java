@@ -60,19 +60,19 @@ public class Main {
 		val f = new File(path);
 
 		if (f.exists() && f.isDirectory()) {
-			File[] repositories = null;
+			File[] repositories;
 
 			if (project == null) {
 				repositories = f.listFiles(File::isDirectory);
 			} else {
 				repositories = f.listFiles(File::isDirectory);
-				repositories = Arrays.stream(repositories).filter(t -> t.getName().equals(project))
+				repositories = Arrays.stream(repositories)
+						.filter(t -> t.getName().equals(project))
 						.toArray(File[]::new);
 			}
 
 			try {
 				val csvPath = Paths.get(f.getAbsolutePath(), "..", "out", "results.csv");
-
 				val csv = new FileCSV(csvPath);
 
 				if (repositories != null) {
@@ -111,9 +111,13 @@ public class Main {
 	}
 
 	public static void usage() {
-		logger.error("java -jar cpp-evolution.jar <path>\n");
-		logger.error("\nArguments\n");
-		logger.error("<path> - The path to a/set of git repository(ies) containing c++ code");
+		logger.info("java -jar cpp-evolution.jar <path>\n");
+		logger.info("\nArguments\n");
+		logger.info("<path> 			- The path to a/set of git repository(ies) containing c++ code (must be first)");
+		logger.info("--step=<int>	    - The number of steps used when walking the project");
+		logger.info("--threads=<int>    - The number of threads used to walk the project");
+		logger.info("--project=<string> - A string denoting the name of the project");
+
 	}
 
 }
