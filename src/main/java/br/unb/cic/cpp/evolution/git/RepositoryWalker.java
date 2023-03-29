@@ -28,7 +28,6 @@ import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import br.unb.cic.cpp.evolution.osValidation;
 import br.unb.cic.cpp.evolution.io.FileUtil;
 import br.unb.cic.cpp.evolution.model.Observation;
 import br.unb.cic.cpp.evolution.model.Observations;
@@ -59,10 +58,13 @@ public class RepositoryWalker {
 		this.project = project;
 		this.path = path;
 
-		FileRepositoryBuilder builder = new FileRepositoryBuilder();
+		val builder = new FileRepositoryBuilder();
 
-		repository = builder.setGitDir(new File(path + osValidation.osBarLine() + ".git")).readEnvironment()
-				.findGitDir().build();
+		repository = builder.setGitDir(new File(path, ".git"))
+				.readEnvironment()
+				.findGitDir()
+				.build();
+
 		observations = new HashSet<>();
 		summary = new ArrayList<>();
 	}

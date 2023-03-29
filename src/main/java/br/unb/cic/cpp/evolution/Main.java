@@ -1,6 +1,8 @@
 package br.unb.cic.cpp.evolution;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +25,8 @@ public class Main {
 	private static String project = null;
 
 	public static void main(final String[] args) throws Exception {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		val formatter = new SimpleDateFormat("dd-MM-yyyy");
+
 		int threads = 0;
 
 		Date initialDate = formatter.parse("01-01-2010");
@@ -34,6 +37,7 @@ public class Main {
 			usage();
 			System.exit(1);
 		}
+
 		for (int i = 1; i < args.length; i++) {
 			if (args[i].startsWith("--threads")) {
 				threads = Integer.parseInt(args[i].replace("--threads=", ""));
@@ -56,8 +60,8 @@ public class Main {
 		val f = new File(path);
 
 		if (f.exists() && f.isDirectory()) {
-
 			File[] repositories = null;
+
 			if (project == null) {
 				repositories = f.listFiles(File::isDirectory);
 			} else {
@@ -65,9 +69,12 @@ public class Main {
 				repositories = Arrays.stream(repositories).filter(t -> t.getName().equals(project))
 						.toArray(File[]::new);
 			}
+
 			try {
-				val csv = new FileCSV(f.getAbsolutePath() + osValidation.osBarLine() + ".." + osValidation.osBarLine()
-						+ "out" + osValidation.osBarLine() + "results.csv");
+				val csvPath = Paths.get(f.getAbsolutePath(), "..", "out", "results.csv");
+
+				val csv = new FileCSV(csvPath);
+
 				if (repositories != null) {
 					val cores = threads == 0 ? Runtime.getRuntime().availableProcessors() : threads;
 					val pool = Executors.newFixedThreadPool(cores);
@@ -75,20 +82,26 @@ public class Main {
 					val futures = new ArrayList<Future>();
 
 					for (File repository : repositories) {
-						val outputFile = f.getAbsolutePath() + osValidation.osBarLine() + ".."
-								+ osValidation.osBarLine() + "out" + osValidation.osBarLine() + repository.getName()
-								+ ".md";
-						val walker = RepositoryWalkerTask.builder().csv(csv).repositoryName(repository.getName())
-								.repositoryPath(repository.getAbsolutePath()).repositoryObservationsFile(outputFile)
-								.initDate(initialDate).endDate(finalDate).step(step).build();
+						val outputFile = Paths.get(f.getAbsolutePath(), "..", "out", repository.getName() + ".md");
+						val walker = RepositoryWalkerTask.builder()
+								.csv(csv)
+								.repositoryName(repository.getName())
+								.repositoryPath(repository.getAbsolutePath())
+								.repositoryObservationsFile(outputFile.toString())
+								.initDate(initialDate)
+								.endDate(finalDate)
+								.step(step)
+								.build();
 
 						futures.add(pool.submit(walker));
 					}
+
 					// We have to synchronize all threads before a call to csv.close()
 					for (Future future : futures) {
 						future.get();
 					}
-          pool.shutdown();
+
+          			pool.shutdown();
 					csv.close();
 				}
 			} catch (Exception e) {

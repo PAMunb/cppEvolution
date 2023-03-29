@@ -3,10 +3,8 @@ package br.unb.cic.cpp.evolution.io;
 import br.unb.cic.cpp.evolution.model.Observations;
 import lombok.val;
 
-import java.io.Closeable;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
 
 public class FileCSV implements Closeable {
@@ -21,9 +19,8 @@ public class FileCSV implements Closeable {
         init();
     }
 
-    public FileCSV(final String path) throws IOException  {
-        pw = new PrintWriter(new FileWriter(path));
-
+    public FileCSV(final Path path) throws IOException  {
+        pw = new PrintWriter(new FileWriter(path.toString()));
         init();
     }
 
