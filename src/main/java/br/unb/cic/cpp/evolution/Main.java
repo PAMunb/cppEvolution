@@ -117,7 +117,6 @@ public class Main {
 		logger.info("--step=<int>	    - The number of steps used when walking the project");
 		logger.info("--threads=<int>    - The number of threads used to walk the project");
 		logger.info("--project=<string> - A string denoting the name of the project");
-
 	}
 
 }
