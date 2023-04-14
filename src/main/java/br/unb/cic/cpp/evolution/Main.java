@@ -1,6 +1,7 @@
 package br.unb.cic.cpp.evolution;
 
 import java.io.File;
+import java.net.URLDecoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -27,11 +28,11 @@ public class Main {
 	public static void main(final String[] args) throws Exception {
 		val formatter = new SimpleDateFormat("dd-MM-yyyy");
 
+		int step = 7;
 		int threads = 0;
 
-		Date initialDate = formatter.parse("01-01-2010");
-		Date finalDate = Calendar.getInstance().getTime();
-		int step = 7;
+		var initialDate = formatter.parse("01-01-2010");
+		var finalDate = Calendar.getInstance().getTime();
 
 		if (args.length == 0 || args[0].isEmpty()) {
 			usage();
@@ -56,24 +57,39 @@ public class Main {
 		logger.info("End date {}", finalDate.toString());
 		logger.info("Step {}", step);
 
-		val path = args[0];
-		val f = new File(path);
+		// make sure to pass the path argument enclosed in quotes if you are using a filepath that contain spaces
+		val repositoriesPath = args[0];
+		val repositoriesPathHandler = new File(repositoriesPath);
 
-		if (f.exists() && f.isDirectory()) {
+		if (repositoriesPathHandler.exists() && repositoriesPathHandler.isDirectory()) {
 			File[] repositories;
 
 			if (project == null) {
-				repositories = f.listFiles(File::isDirectory);
+				repositories = repositoriesPathHandler.listFiles(File::isDirectory);
 			} else {
-				repositories = f.listFiles(File::isDirectory);
+				repositories = repositoriesPathHandler.listFiles(File::isDirectory);
 				repositories = Arrays.stream(repositories)
 						.filter(t -> t.getName().equals(project))
 						.toArray(File[]::new);
 			}
 
 			try {
-				val csvPath = Paths.get(f.getAbsolutePath(), "..", "out", "results.csv");
-				val csv = new FileCSV(csvPath);
+				val repositoriesAbsolutePath = Path.of(repositoriesPathHandler.getAbsolutePath());
+				val repositoriesParentPath = repositoriesAbsolutePath.getParent();
+
+				val resultsFolder = Paths.get(repositoriesParentPath.toString(), "out");
+				val resultsFolderHandler = new File(resultsFolder.toString());
+
+				// if the result folder doesn't exist, create a new one so nothing related to that throws down the line
+				if (!(resultsFolderHandler.exists() || resultsFolderHandler.mkdir())) {
+					logger.error("failed to create results folder, please create the following folder: " + resultsFolder);
+					System.exit(1);
+				}
+
+				val csvFile = Paths.get(resultsFolder.toString(), "results.csv");
+				val csv = new FileCSV(csvFile);
+
+				logger.info("writing results into "+csvFile.toString());
 
 				if (repositories != null) {
 					val cores = threads == 0 ? Runtime.getRuntime().availableProcessors() : threads;
@@ -82,7 +98,7 @@ public class Main {
 					val futures = new ArrayList<Future>();
 
 					for (File repository : repositories) {
-						val outputFile = Paths.get(f.getAbsolutePath(), "..", "out", repository.getName() + ".md");
+						val outputFile = Paths.get(resultsFolder.toString(), repository.getName() + ".md");
 						val walker = RepositoryWalkerTask.builder()
 								.csv(csv)
 								.repositoryName(repository.getName())
