@@ -53,10 +53,6 @@ public class Main {
 			}
 		}
 
-		logger.info("Init date {}", initialDate.toString());
-		logger.info("End date {}", finalDate.toString());
-		logger.info("Step {}", step);
-
 		// make sure to pass the path argument enclosed in quotes if you are using a filepath that contain spaces
 		val repositoriesPath = args[0];
 		val repositoriesPathHandler = new File(repositoriesPath);
@@ -89,7 +85,11 @@ public class Main {
 				val csvFile = Paths.get(resultsFolder.toString(), "results.csv");
 				val csv = new FileCSV(csvFile);
 
-				logger.info("writing results into "+csvFile.toString());
+				logger.info("init date {}", initialDate.toString());
+				logger.info("end date {}", finalDate.toString());
+				logger.info("step {}", step);
+				logger.info("threads {}", threads);
+				logger.info("writing results into {}", csvFile.toString());
 
 				if (repositories != null) {
 					val cores = threads == 0 ? Runtime.getRuntime().availableProcessors() : threads;
